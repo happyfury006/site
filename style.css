@@ -1,27 +1,25 @@
-
-
-@font-face {
-  font-family: 'Aurebesh';
-  src: url('./fonts/galactic_basic/galbasic.ttf') format('truetype') ;
-  
-}
-
-@font-face {
-  font-family: 'Aurebesh2';
-  src: url('./fonts/galactic_basic/AurebeshEnglishRegular-rjeO.ttf') format('truetype') ;
-  
-}
-
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   color: yellow;
-  /* font-family: 'Aurebesh2'; */
+  font-family: 'Aurebesh';
+}
+
+@font-face {
+  font-family: 'Aurebesh';
+  src: url('./fonts/galactic_basic/galbasic.ttf') format('truetype') ;
+  /* font: size 150%; ; */
+}
+
+@font-face {
+  font-family: 'Aurebesh2';
+  src: url('./fonts/galactic_basic/AurebeshEnglishRegular-rjeO.ttf') format('truetype') ;
+  /* font-size: 70%; */
+
 }
 
 section {
-  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,10 +30,10 @@ section {
   animation: animationfd 5s linear infinite;
 }
 
-
 img{
   border-image-width: auto;
 }
+
 .navbar{
   position: absolute;
   top: 0;
@@ -43,7 +41,6 @@ img{
   height: 50px;
   align-items: center;
   justify-content: space-between;
-
   background-color: transparent;
   backdrop-filter: blur(5px);
   border-bottom-left-radius: 20px;
@@ -51,9 +48,15 @@ img{
   border: 1px solid yellow;
   display: flex;
 }
-.PoliceAurebesh {
+
+.PoliceAurebesh.active {
   transition: transform .18s ease;
   transform: font-family 'Aurebesh';
+}
+
+.PoliceAurebesh2.active {
+  transition: transform .18s ease;
+  transform: font-family 'Aurebesh2';
 }
 
 .wrapper {
@@ -70,11 +73,12 @@ img{
   box-shadow: 0 0 30px black;
   overflow: hidden;
   transition: height .2s ease ;
-
 }
+
 .wrapper.active {
   height: 450px;
 }
+
 .wrapper .form-box{
   width: 100%;
   padding: 40px;
@@ -87,6 +91,7 @@ img{
   transform: translateY(0);
   /* display: none; */
 }
+
 .wrapper.active .form-box.login {
   transition: none;
   transform: translateY(-400px);
@@ -97,6 +102,7 @@ img{
   transition: none;
   transform: translateY(400px);
 }
+
 .wrapper.active .form-box.register {
   transition: transform .18s ease;
   transform: translateY(0);
@@ -106,14 +112,13 @@ img{
   font-size: 3em;
   color: yellow;
   text-align: center;
-
 }
+
 .input-box {
   position: relative;
   width: 320px;
   margin: 30px 0;
   border-bottom: 2px solid;
-
 }
 
 .input-box label {
@@ -124,12 +129,13 @@ img{
   font-size: 1em;
   pointer-events: none;
   transition: .5s;
-
 }
+
 .input-box input:focus~label,
 .input-box input:valid~label {
   top: -6px;
 }
+
 .input-box input {
   width: 100%;
   height: 50px;
@@ -140,14 +146,15 @@ img{
   color: black;
   padding: 0 40px 0 5px;
 }
+
 .input-box .icon {
   position: absolute;
   right: 10px;
   color: blue;
   font-size: 1.5em;
   line-height: 60px;
-  
 }
+
 .remember-forgot {
   color: yellow;
   margin: -15px 0 15px;
@@ -159,19 +166,19 @@ img{
 .remember-forgot label input{
   margin-right: 3px;
   color: yellow;
-
 }
 
 .remember-forgot a {
   text-decoration: none;
   color: yellow;
-
 }
+
 .remember-forgot a :hover {
   
   text-decoration: underline;
 
 }
+
 button {
   width: 100%;
   height: 40px;
@@ -183,41 +190,42 @@ button {
   font-size: 1.2em;
   color: black;
   font-weight: 500;
-  
 }
+
 .register-link {
   color: white;
   font-size: 1em;
   text-align: center;
   margin: 25px 0 10px;
 }
+
 .register-link p a {
   color: white;
   text-decoration: none;
   font-weight: 600;
-
 }
+
 
 .register-link p a:hover {
   text-decoration: underline;
 }
+
 .login-link {
   color: white;
   font-size: 1em;
   text-align: center;
   margin: 25px 0 10px;
 }
+
 .login-link p a {
   color: white;
   text-decoration: none;
   font-weight: 600;
-
 }
 
 .login-link p a:hover {
   text-decoration: underline;
 }
-
 
 @media (max-width:360px){
   .form-box{
@@ -225,7 +233,6 @@ button {
     height: 100vh;
     border: none;
     border-radius: 0px;
-
   }
   .input-box{
     width: 290px;
