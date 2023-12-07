@@ -1,0 +1,108 @@
+/*******************************************************************************************/
+/*     POLICE                                                                              */
+/*******************************************************************************************/
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: yellow;
+}
+
+@font-face {
+  font-family: 'Aurebesh';
+  src: url('./fonts/galactic_basic/galbasic.ttf') format('truetype') ;
+  /* font: size 10%;  */
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: 'Aurebesh2';
+  src: url('./fonts/galactic_basic/AurebeshEnglishRegular-rjeO.ttf') format('truetype') ;
+  /* font-size: 10%; */
+}
+.page_French{
+  font-family: "Droid Sans", arial, verdana, sans-serif;
+}
+
+.page_Aurebesh{
+  font-family: 'Aurebesh';
+}
+.page_Aurebesh2{
+  font-family: 'Aurebesh2';
+}
+/* .PoliceAurebesh.active {
+  transition: transform .18s ease;
+  transform: font-family 'Aurebesh';
+}
+
+.PoliceAurebesh2.active {
+  transition: transform .18s ease;
+  transform: font-family 'Aurebesh2';
+} */
+
+/*******************************************************************************************/
+/*     Main                                                                                */
+/*******************************************************************************************/
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('../images/fond\ etoilé.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  animation: animationfd 5s linear infinite;
+}
+
+/* img{
+  border-image-width: auto;
+} */
+
+.navbar{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  justify-content: space-between ;
+  background-color: transparent;
+  backdrop-filter: blur(5px);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border: 2px solid yellow;
+  display: flex; 
+}
+
+}
+.LanguageSelector a{
+  text-decoration: none;
+}
+.LanguageSelector a :hover{
+  font-size :120%;
+}
+
+
+
+@media (max-width:360px){
+  .form-box{
+    width: 100%;
+    height: 100vh;
+    border: none;
+    border-radius: 0px;
+  }
+  .input-box{
+    width: 290px;
+  }
+  .boxplanets{
+    width: 50px;
+  }
+}
+
+
+body, html{
+  height: 100%;
+  min-height: 100vh;
+  margin: 0px;
+}

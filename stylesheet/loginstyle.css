@@ -1,0 +1,430 @@
+/*******************************************************************************************/
+/*     Button for a login form and end the starting animation                              */
+/*******************************************************************************************/
+
+
+.login-button-navbar{
+    position: relative;
+    justify-content: center;
+}
+.login-button-navbar a {
+    text-decoration: none;
+}
+.login-button-navbar a :hover{
+    text-decoration: underline;
+}
+
+
+/*******************************************************************************************/
+/*     Box Login                                                                           */
+/*******************************************************************************************/
+.wrapper {
+    opacity :1;
+    transition-delay: 0.5s;
+    transition: opacity 0.5s ease-in, height 0.5s ease-in;
+    position: relative;
+    width: 400px;
+    height: 450px;
+    background-color: transparent;
+    border-radius: 30px;
+    border: 2px solid yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(3px);
+    box-shadow: 0 0 30px black;
+    overflow: hidden;
+    transition: height .2s ease ;
+  }
+  .form-box h2{
+    font-size: 3em;
+    color: yellow;
+    text-align: center;
+    /* justify-content: center;
+    align-items: center; */
+  }
+  .form-box{
+    position: absolute;
+    
+  }
+  
+  .input-box {
+    position: relative;
+    width: 320px;
+    margin: 30px 0;
+    border-bottom: 2px solid;
+  }
+  
+  .input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    pointer-events: none;
+    transition: .5s;
+  }
+  
+  .input-box input:focus~label,
+  .input-box input:valid~label {
+    top: -6px;
+  }
+  
+  .input-box input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: black;
+    padding: 0 40px 0 5px;
+  }
+  
+  .input-box .icon {
+    position: absolute;
+    right: 10px;
+    color: blue;
+    font-size: 1.5em;
+    line-height: 60px;
+  }
+  
+  .remember-forgot {
+    color: yellow;
+    margin: -15px 0 15px;
+    font: 1em;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .remember-forgot label input{
+    margin-right: 3px;
+    color: yellow;
+  }
+  
+  .remember-forgot a {
+    text-decoration: none;
+    color: yellow;
+  }
+  
+  .remember-forgot a :hover {
+    text-decoration: underline;
+  }
+  
+  button {
+    width: 100%;
+    height: 40px;
+    background: white;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: black;
+    font-weight: 500;
+  }
+  
+  .register-link {
+    color: white;
+    font-size: 1em;
+    text-align: center;
+    margin: 25px 0 10px;
+  }
+  
+  .register-link p a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .register-link p a:hover {
+    text-decoration: underline;
+  }
+  
+  .login-link {
+    color: white;
+    font-size: 1em;
+    text-align: center;
+    margin: 25px 0 10px;
+  }
+  
+  .login-link p a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .login-link p a:hover {
+    text-decoration: underline;
+  }
+  
+  
+  /*******************************************************************************************/
+  /*     Box Login  Animation                                                                */
+  /*******************************************************************************************/
+  
+  .wrapper.invisible{
+    /* visibility: hidden; */
+    display: none;
+  }
+  
+  .star-wars-intro.invisible{
+    opacity: 0;
+    min-height: 0%;
+    transition: opacity 0.5s ease-out, min-height 0.5s ease-out;
+    display: none;
+  }
+  
+  .wrapper.active {
+    height: 450px;
+  }
+  
+  .wrapper .form-box{
+    width: 100%;
+    padding: 40px;
+  }
+  
+  /* switch de fenetre entre login and register */
+  
+  .wrapper .form-box.login {
+    transition: transform .18s ease;
+    transform: translateX(0);
+    /* display: none; */
+  }
+  
+  .wrapper.active .form-box.login {
+    transition: none;
+    transform: translateX(-400px);
+  }
+  
+  .wrapper .form-box.register {
+    transition: none;
+    transform: translateX(400px);
+  }
+  
+  .wrapper.active .form-box.register {
+    transition: transform .18s ease;
+    transform: translateX(0);
+  }
+
+  
+/*
+Name: StarWarsIntro.css
+URI: polarnotion.github.io/starwarsintro
+Author: Polar Notion
+Author URI: http://polarnotion.com/
+Description: A simple CSS library for creating a Star Wars Intro Crawl. May the Force be with you.
+Version: 1.0
+*/
+
+
+
+/*******************************************************************************************/
+/*     ANIMATION STARWARS G2N2RIQUE                                                        */
+/*******************************************************************************************/
+
+.star-wars-intro {
+    /* background: url("img/stars-bg.jpg") center center; */
+    width: 100%;
+    height: 100%;
+    font-family: "Droid Sans", arial, verdana, sans-serif;
+    font-weight: 700;
+    color: #EBD71C;
+    background-color: transparent;
+    overflow: hidden;
+    position: fixed ;
+    left: 0;
+    top: 0;
+    
+  }
+  
+  .star-wars-intro p.intro-text {
+    position: relative;
+    max-width: 16em;
+    font-size: 200%;
+    font-weight: 400;
+    margin: 20% auto;
+    color: #4ee;
+    opacity: 0;
+    z-index: 1;
+    text-align: center;
+    -webkit-animation: intro 2s ease-out;
+    -moz-animation: intro 2s ease-out;
+    -ms-animation: intro 2s ease-out;
+    -o-animation: intro 2s ease-out;
+    animation: intro 2s ease-out;
+  }
+  
+  .star-wars-intro .main-content{
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    z-index: 3;
+    width: 98%;
+    height: 50em;
+    bottom: 0;
+    font-size: 80px;
+    font-weight: bold;
+    text-align: justify;
+    overflow: hidden;
+    transform-origin: 50% 100%;
+    transform: perspective(350px) rotateX(25deg);
+  }
+  
+  .star-wars-intro .main-content:after {
+    position: absolute;
+    content: ' ';
+    top: 0;
+    bottom: 60%;
+    background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+    pointer-events: none;
+  }
+  
+  .star-wars-intro .space-button {
+    color: #EBD71C;
+    border: 12px solid #EBD71C;
+    padding: 20px;
+    background: transparent;
+    text-decoration: none;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+  }
+  
+  .star-wars-intro .space-button:hover {
+    background-color: #D2BE03;
+    border-color: #D2BE03;
+    color: black;
+  }
+  
+  .star-wars-intro .space-button:active,
+  .star-wars-intro .space-button:focus {
+    background-color: #B8A40A;
+    border-color: #B8A40A;
+    color: black;
+  }
+  
+  .star-wars-intro .title-content {
+    position: absolute;
+    top: 100%;
+    animation: scroll 120s linear 4s forwards;
+  }
+  
+  .star-wars-intro .title-content > .content-header {
+    text-align: center;
+  }
+  
+  /* Main Image Styles */
+  
+  .star-wars-intro .main-logo {
+    position: absolute;
+    width: 2.6em;
+    left: 50%;
+    top: 20vh;
+    font-size: 10em;
+    text-align: center;
+    margin-left: -1.3em;
+    line-height: 0.8em;
+    letter-spacing: -0.05em;
+    color: #000;
+    text-shadow: -2px -2px 0 #EBD71C, 2px -2px 0 #EBD71C, -2px 2px 0 #EBD71C, 2px 2px 0 #EBD71C;
+    opacity: 0;
+    z-index: 1;
+    -webkit-animation: logo 5s ease-out 2.5s;
+    -moz-animation: logo 5s ease-out 2.5s;
+    -ms-animation: logo 5s ease-out 2.5s;
+    -o-animation: logo 5s ease-out 2.5s;
+    animation: logo 5s ease-out 2.5s;
+  }
+  
+  .star-wars-intro .main-logo > img {
+    max-width: 100%;
+  }
+  
+  @-webkit-keyframes intro {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  @-moz-keyframes intro {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  @-ms-keyframes intro {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  @-o-keyframes intro {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  @keyframes intro {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  
+  @-webkit-keyframes logo {
+    0% { -webkit-transform: scale(1); opacity: 1; }
+    50% { opacity: 1; }
+    100% { -webkit-transform: scale(0.1); opacity: 0; }
+  }
+  
+  @-moz-keyframes logo {
+    0% { -moz-transform: scale(1); opacity: 1; }
+    50% { opacity: 1; }
+    100% { -moz-transform: scale(0.1); opacity: 0; }
+  }
+  
+  @-ms-keyframes logo {
+    0% { -ms-transform: scale(1); opacity: 1; }
+    50% { opacity: 1; }
+    100% { -ms-transform: scale(0.1); opacity: 0; }
+  }
+  
+  @-o-keyframes logo {
+    0% { -o-transform: scale(1); opacity: 1; }
+    50% { opacity: 1; }
+    100% { -o-transform: scale(0.1); opacity: 0; }
+  }
+  
+  @keyframes logo {
+    0% { transform: scale(1); opacity: 1; }
+    50% { opacity: 1; }
+    100% { transform: scale(0.1); opacity: 0; }
+  }
+  
+  @keyframes scroll {
+    0% { top: 100%; }
+    100% { top: -170%; }
+  }
+  
+  @media screen and (max-width: 720px) {
+    .star-wars-intro .main-content {
+      font-size: 35px;
+    }
+    .star-wars-intro .title-content {
+      position: absolute;
+      top: 100%;
+      animation: scroll 100s linear 4s forwards;
+    }
+    .form-box{
+      width: 100%;
+      height: 100vh;
+      border: none;
+      border-radius: 0px;
+    }
+    .input-box{
+      width: 290px;
+    }
+    
+  }
+  
