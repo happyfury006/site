@@ -5,7 +5,6 @@
     height: 30%;
     width: 10%;
     align-items: center;
-    
     justify-content: center;
     justify-content: space-between;
     padding: 10px ;
@@ -25,34 +24,20 @@
     height: 100%;
     width:100%;
     padding-top: 5px;
-    
     /* border-top: 2px solid yellow; */
-    
     border-bottom: 4px solid yellow;
     overflow: hidden;
     justify-content: center;
     align-items: center;
 }
+
+.box a {
+    text-decoration: none;
+}
+
 .box.Dathomir{
     border-bottom: none;
 }
-/* .Corrusant{
-    border-bottom: 2px solid yellow ;
-    position: relative;
-}
-.Naboo{
-    position: relative;
-    border-bottom: 2px solid yellow;
-}
-.Scariff{
-    position: relative;
-    border-bottom: 2px solid yellow ;
-
-}
-.Dathomir{
-    position: relative;
-} */
-
 
 
 .boxplanets.active{
@@ -62,24 +47,16 @@
 .box.Corrusant.active{
     transition: transform 0.5s ease;
     transform: translateY(400px);
-    
-
 }
 .box.Naboo.active{
     transition: transform 0.5s ease;
     transform: translateY(400px);
-    
-
 }
 .box.Scariff.active{
     transition: transform 0.5s ease;
     transform: translateY(400px);
-    
-
 }
 .box.Dathomir.active{
     transition: transform 0.5s ease;
     transform: translateY(400px);
-    
-
 }
