@@ -11,14 +11,14 @@
 
 @font-face {
   font-family: 'Aurebesh';
-  src: url('./fonts/galactic_basic/galbasic.ttf') format('truetype') ;
+  src: url('../fonts/galactic_basic/galbasic.ttf') format('truetype') ;
   /* font: size 10%;  */
   font-weight: 100;
 }
 
 @font-face {
   font-family: 'Aurebesh2';
-  src: url('./fonts/galactic_basic/AurebeshEnglishRegular-rjeO.ttf') format('truetype') ;
+  src: url('../fonts/galactic_basic/AurebeshEnglishRegular-rjeO.ttf') format('truetype') ;
   /* font-size: 10%; */
 }
 .page_French{
@@ -61,6 +61,7 @@ section {
 
 .navbar{
   position: absolute;
+  z-index: 10;
   top: 0;
   left: 0;
   width: 100%;

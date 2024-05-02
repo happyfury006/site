@@ -1,9 +1,16 @@
+.Menu-planet-button-navbar a{
+    text-decoration: none;  
+}
+
+/* Style graphique de la fentre */
+
 .boxplanets{
     position: absolute;
-    top: 50px;
+    top: -350px;
     left: 0;
     height: 30%;
     width: 10%;
+    z-index: 5;
     align-items: center;
     justify-content: center;
     justify-content: space-between;
@@ -15,48 +22,114 @@
     border-bottom-right-radius:20px;
     overflow: hidden;
     display: flex;
-    flex-direction:column ;
-    
+    flex-direction:column; 
 }
 
+/* .boxplanets.init{
+    transition: none;
+    transform: translateY(400px);
+} */
+
 .box{
-    /* position: top; */
+    position: relative;
     height: 100%;
     width:100%;
     padding-top: 5px;
     /* border-top: 2px solid yellow; */
-    border-bottom: 4px solid yellow;
+    border-bottom: 3px solid yellow;
     overflow: hidden;
     justify-content: center;
     align-items: center;
 }
-
 .box a {
     text-decoration: none;
 }
-
 .box.Dathomir{
-    border-bottom: none;
+    border-bottom: remove;
+    /* d'après le tib il faut définir 
+    une class spécial pour cet box */
 }
+.box.Corrusant{
+    position: relative;
+    top:-100px;
 
-
+}
+.box.Naboo{
+    position: relative;
+    top:-100px;
+    
+}
+.box.Scariff{
+    position: relative;
+    top:-100px;
+    
+}
+.box.Dathomir{
+    position: relative;
+    top:-100px;
+    
+}
+/* Transition ouverture et fermeture du menu */
 .boxplanets.active{
-    transition: transform 0.5s ease;
+    transition: transform .5s ease;
     transform: translateY(400px);
 }
+.boxplanets.invisible{
+    transition: transform .5s ease;
+    transform: translateY(-400px);
+}
+
+.box.Corrusant.invisible{
+    transition: transform .5s ease;
+    transform: translateY(-100px);
+}
+.box.Naboo.invisible{
+    transition: transform .5s ease;
+    transform: translateY( -100px);
+}
+.box.Scariff.invisible{
+    transition: transform .5s ease;
+    transform: translateY( -100px);
+}
+.box.Dathomir.invisible{
+    transition: transform .5s ease;
+    transform: translateY( -100px);
+}
+
+
 .box.Corrusant.active{
-    transition: transform 0.5s ease;
-    transform: translateY(400px);
+    transition: transform .5s ease;
+    transform: translateY(100px);
 }
 .box.Naboo.active{
-    transition: transform 0.5s ease;
-    transform: translateY(400px);
+    transition: transform .5s ease;
+    transform: translateY( 100px);
 }
 .box.Scariff.active{
-    transition: transform 0.5s ease;
-    transform: translateY(400px);
+    transition: transform .5s ease;
+    transform: translateY( 100px);
 }
 .box.Dathomir.active{
-    transition: transform 0.5s ease;
-    transform: translateY(400px);
+    transition: transform .5s ease;
+    transform: translateY( 100px);
+}
+
+/* affichage de l'image correspondant
+ a la planete en passant la souris 
+ sur son nom */
+.box.Corrusant a :hover{
+    transition: opacity .5s ease;
+    
+}
+.box.Naboo a :hover{
+    transition: opacity .5s ease;
+    
+}
+.box.Scariff a :hover{
+    transition: opacity .5s ease;
+    
+}
+.box.Dathomir a :hover{
+    transition: opacity .5s ease;
+    
 }
