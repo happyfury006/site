@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZZ Wars : la galaxie associative de Julen Somet García</title>
+<meta name="description" content="Mon engagement associatif à l'ISIMA : conseil d'administration du BDE, trésorier du week-end d'accueil, refonte du site du BDE et cofondation de l'association Drezzing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Générique d'ouverture : il disparaît seul à la fin, ou dès qu'on clique sur « Passer » -->
+<section class="intro" aria-label="Générique d'ouverture">
+  <p class="intro-debut">Il y a peu de temps, dans une école d'ingénieurs pas si lointaine…</p>
+  <p class="intro-logo">ZZ<br>WARS</p>
+  <div class="defilement" aria-hidden="true">
+    <div class="defilement-texte">
+      <p class="episode">Épisode IV</p>
+      <p class="episode-titre">UN NOUVEL ENGAGEMENT</p>
+      <p>Après des années de silence, le padawan JSG est entré au temple de l'ISIMA pour apprendre les usages de la Force informatique. Mais la Force ne se trouve pas seulement derrière un écran.</p>
+      <p>Pour tenir le rythme des heures de code, le jeune padawan a rejoint l'associatif de l'école. Il siège au conseil d'administration du Bureau des élèves, il a tenu les comptes d'un week-end d'accueil de vingt mille crédits, et il reconstruit le site du BDE.</p>
+      <p>Il a aussi cofondé sa propre faction : Drezzing, qui habille l'école à ses couleurs. Voici la carte de cette galaxie…</p>
+    </div>
+  </div>
+  <a class="passer" href="#galaxie">Passer l'intro ↓</a>
+</section>
+
+<header class="entete" id="galaxie">
+  <a class="retour" href="/">← Portfolio</a>
+  <p class="aurebesh" aria-hidden="true">galaxie associative</p>
+  <h1>La galaxie associative</h1>
+  <p class="sous-titre">Mon engagement à l'ISIMA, planète par planète. Cliquez sur une planète ou une lune pour ouvrir sa fiche.</p>
+</header>
+
+<main>
+  <!-- Carte : chaque astre est un lien vers sa fiche (#fiche-…), ouverte en CSS avec :target -->
+  <div class="carte" role="list">
+    <div class="systeme systeme-bde" role="listitem">
+      <a class="planete planete-bde" href="#fiche-bde"><span>BDE</span></a>
+      <div class="orbite orbite-1"><a class="lune lune-ca" href="#fiche-ca"><span>Conseil d'administration</span></a></div>
+      <div class="orbite orbite-2"><a class="lune lune-wea" href="#fiche-weekend"><span>Week-end d'accueil</span></a></div>
+      <div class="orbite orbite-3"><a class="lune lune-site" href="#fiche-site"><span>Site du BDE</span></a></div>
+    </div>
+    <div class="systeme systeme-drezzing" role="listitem">
+      <a class="planete planete-drezzing" href="#fiche-drezzing"><span>Drezzing</span></a>
+      <div class="orbite orbite-1"><a class="lune lune-boutique" href="#fiche-boutique"><span>Boutique en ligne</span></a></div>
+    </div>
+  </div>
+
+  <!-- La même navigation sous forme de liste : lecteurs d'écran, clavier, petits écrans -->
+  <nav class="liste" aria-label="Toutes les fiches">
+    <h2>Toutes les missions</h2>
+    <ul>
+      <li><a href="#fiche-bde">BDE de l'ISIMA</a>
+        <ul>
+          <li><a href="#fiche-ca">Conseil d'administration</a></li>
+          <li><a href="#fiche-weekend">Trésorier du week-end d'accueil</a></li>
+          <li><a href="#fiche-site">Refonte du site du BDE</a></li>
+        </ul>
+      </li>
+      <li><a href="#fiche-drezzing">Drezzing, l'association</a>
+        <ul>
+          <li><a href="#fiche-boutique">La boutique en ligne</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</main>
+
+<!-- Fiches : cachées par défaut, affichées quand l'adresse se termine par leur #identifiant -->
+<article class="fiche" id="fiche-bde" aria-labelledby="titre-bde">
+  <div class="fiche-cadre">
+    <a class="fermer" href="#galaxie" aria-label="Fermer la fiche">×</a>
+    <p class="fiche-type">Planète</p>
+    <h2 id="titre-bde">Le BDE de l'ISIMA</h2>
+    <p>Le Bureau des élèves fait vivre l'école : adhérents, pôles, clubs, événements, boutique et transactions. C'est autour de lui que gravite la plus grande partie de mon engagement associatif.</p>
+    <p>Trois lunes tournent autour de cette planète :</p>
+    <ul class="liens-fiche">
+      <li><a href="#fiche-ca">Le conseil d'administration</a></li>
+      <li><a href="#fiche-weekend">Le week-end d'accueil, dont j'ai été le trésorier</a></li>
+      <li><a href="#fiche-site">La refonte du site du BDE</a></li>
+    </ul>
+  </div>
+</article>
+
+<article class="fiche" id="fiche-ca" aria-labelledby="titre-ca">
+  <div class="fiche-cadre">
+    <a class="fermer" href="#galaxie" aria-label="Fermer la fiche">×</a>
+    <p class="fiche-type">Lune du BDE</p>
+    <h2 id="titre-ca">Conseil d'administration</h2>
+    <p class="role">Membre du conseil d'administration du BDE</p>
+    <p>Le conseil d'administration réunit les élus qui orientent le BDE : son organisation, ses pôles et ses clubs, et les décisions qui engagent l'association.</p>
+    <!-- À enrichir : années du mandat, sujets portés au conseil, décisions auxquelles tu as contribué -->
+    <p class="retour-carte"><a href="#galaxie">← Retour à la carte</a></p>
+  </div>
+</article>
+
+<article class="fiche" id="fiche-weekend" aria-labelledby="titre-weekend">
+  <div class="fiche-cadre">
+    <a class="fermer" href="#galaxie" aria-label="Fermer la fiche">×</a>
+    <p class="fiche-type">Lune du BDE</p>
+    <h2 id="titre-weekend">Le week-end d'accueil</h2>
+    <p class="role">Trésorier</p>
+    <p class="chiffre"><strong>20 000 €</strong> de budget</p>
+    <p>Le week-end d'accueil accueille les nouveaux élèves de l'école. En tant que trésorier, j'étais responsable de son budget.</p>
+    <!-- À enrichir : année, nombre de participants, ce que tu as géré (devis, paiements, suivi des dépenses, bilan) -->
+    <p class="retour-carte"><a href="#galaxie">← Retour à la carte</a></p>
+  </div>
+</article>
+
+<article class="fiche" id="fiche-site" aria-labelledby="titre-site">
+  <div class="fiche-cadre">
+    <a class="fermer" href="#galaxie" aria-label="Fermer la fiche">×</a>
+    <p class="fiche-type">Lune du BDE</p>
+    <h2 id="titre-site">La refonte du site du BDE</h2>
+    <p class="role">Développeur fullstack, équipe de 3 · en cours</p>
+    <p>Le site doit répondre à un besoin qui grandit chaque année : automatiser les tâches régulières des membres du BDE. La refonte remplace l'ancien site par une API Django et une interface React, adossées à PostgreSQL, avec des permissions qui permettent à chaque organisation de se gérer elle-même.</p>
+    <ul>
+      <li>Module Organisations : membres, postes, mandats et hiérarchie des pôles et des clubs</li>
+      <li>Permissions liées au poste occupé dans l'organisation, et non plus à un rôle global</li>
+      <li>Création de compte sécurisée et sessions persistantes</li>
+    </ul>
+    <p class="retour-carte"><a href="/projets/refonte-site-bde/">Voir la fiche du projet →</a> · <a href="#galaxie">← Retour à la carte</a></p>
+  </div>
+</article>
+
+<article class="fiche" id="fiche-drezzing" aria-labelledby="titre-drezzing">
+  <div class="fiche-cadre">
+    <a class="fermer" href="#galaxie" aria-label="Fermer la fiche">×</a>
+    <p class="fiche-type">Planète</p>
+    <h2 id="titre-drezzing">Drezzing</h2>
+    <p class="role">Cofondateur de l'association</p>
+    <p>Drezzing vend des tissus et des objets aux couleurs de l'ISIMA et de ses promotions. Je l'ai cofondée, et nous l'avons dotée d'une boutique en ligne que l'association peut gérer seule.</p>
+    <!-- À enrichir : année de création, ton rôle dans le bureau, nombre de produits ou de commandes -->
+    <ul class="liens-fiche">
+      <li><a href="#fiche-boutique">La boutique en ligne</a></li>
+      <li><a href="https://drezzing.fr" target="_blank" rel="noopener">drezzing.fr ↗</a></li>
+    </ul>
+  </div>
+</article>
+
+<article class="fiche" id="fiche-boutique" aria-labelledby="titre-boutique">
+  <div class="fiche-cadre">
+    <a class="fermer" href="#galaxie" aria-label="Fermer la fiche">×</a>
+    <p class="fiche-type">Lune de Drezzing</p>
+    <h2 id="titre-boutique">La boutique en ligne</h2>
+    <p class="role">Contributeur front-end, équipe de 2</p>
+    <p>Un front SvelteKit branché sur Medusa, une solution e-commerce open source qui gère le catalogue, le panier et les paiements. Nous sommes partis de zéro, sans maquette, et avons revu l'architecture plusieurs fois à mesure que le site prenait forme.</p>
+    <ul>
+      <li>Pages des collections et des catégories, avec pagination et filtres</li>
+      <li>En-tête et panneaux latéraux réunis dans des composants réutilisables</li>
+      <li>Pages légales : mentions, conditions générales de vente, confidentialité</li>
+    </ul>
+    <p class="retour-carte"><a href="/projets/boutique-drezzing/">Voir la fiche du projet →</a> · <a href="https://drezzing.fr" target="_blank" rel="noopener">drezzing.fr ↗</a> · <a href="#galaxie">← Retour à la carte</a></p>
+  </div>
+</article>
+
+<footer class="pied">
+  <p>Julen Somet García · <a href="/">Portfolio</a> · <a href="/#contact">Contact</a></p>
+  <p class="clin-oeil">Un clin d'œil à une saga bien connue, sans lien avec ses créateurs.</p>
+</footer>
+</body>
+</html>
