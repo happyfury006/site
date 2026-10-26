@@ -128,6 +128,9 @@ body:has(:target) .intro { display: none; }
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
   transform-origin: 50% 100%;
   transform: translateX(-50%) rotateX(25deg);
+  /* invisible tant qu'il n'a pas commencé : la perspective ferait remonter ses
+     premières lignes dans l'écran pendant le logo */
+  visibility: hidden;
   animation: defiler 32s linear 13s forwards;
 }
 .defilement-texte p { margin: 0 0 1.2em; }
@@ -156,8 +159,8 @@ body:has(:target) .intro { display: none; }
   100% { opacity: 0; transform: translate(-50%, -50%) scale(0.05); }
 }
 @keyframes defiler {
-  from { transform: translateX(-50%) rotateX(25deg) translateY(0); }
-  to { transform: translateX(-50%) rotateX(25deg) translateY(-260%); }
+  from { visibility: visible; transform: translateX(-50%) rotateX(25deg) translateY(0); }
+  to { visibility: visible; transform: translateX(-50%) rotateX(25deg) translateY(-260%); }
 }
 @keyframes intro-fin { to { opacity: 0; visibility: hidden; } }
 
