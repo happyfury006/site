@@ -33,16 +33,19 @@
     const r = intro.getBoundingClientRect();
     const course = r.height - window.innerHeight;
     const p = course > 0 ? Math.min(1, Math.max(0, -r.top / course)) : 1;
-    const logo = etape(p, 0.14, 0.38);
-    const texte = etape(p, 0.36, 0.92);
+    const logo = etape(p, 0.1, 0.27);
+    const texte = etape(p, 0.26, 0.8);
     const valeurs = {
-      "--indice-o": 1 - etape(p, 0, 0.03),
-      "--debut-o": 1 - etape(p, 0.08, 0.14),
-      "--logo-o": etape(p, 0.12, 0.15) * (1 - etape(p, 0.34, 0.38)),
+      "--indice-o": 1 - etape(p, 0, 0.02),
+      "--debut-o": 1 - etape(p, 0.05, 0.1),
+      "--logo-o": etape(p, 0.09, 0.11) * (1 - etape(p, 0.24, 0.27)),
       "--logo-s": 2.6 - 2.55 * logo,
-      "--texte-o": etape(p, 0.36, 0.38) * (1 - etape(p, 0.9, 0.95)),
+      "--texte-o": etape(p, 0.26, 0.28) * (1 - etape(p, 0.78, 0.82)),
       "--texte-y": texte,
-      "--hyper": etape(p, 0.86, 1),
+      // hyperespace : les traits s'intensifient, l'éclair éclate, puis tout s'efface
+      "--hyper": etape(p, 0.8, 0.94),
+      "--hyper-o": etape(p, 0.8, 0.84) * (1 - etape(p, 0.95, 1)),
+      "--eclair": etape(p, 0.91, 0.95) * (1 - etape(p, 0.95, 1)),
     };
     for (const [nom, valeur] of Object.entries(valeurs)) intro.style.setProperty(nom, valeur.toFixed(4));
   };

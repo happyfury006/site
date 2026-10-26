@@ -70,7 +70,7 @@ h1, h2 { font-family: var(--titre); font-weight: 700; line-height: 1.15; margin:
    progression et donne les valeurs --debut-o, --logo-s, --texte-y, --hyper… */
 .intro { position: relative; }
 .intro-scene { position: relative; padding: 40px 16px; text-align: center; }
-.hyperespace, .indice, .passer { display: none; }
+.hyperespace, .eclair, .indice { display: none; }
 .intro-debut { margin: 0 auto 1rem; max-width: 26em; font-size: clamp(1.1rem, 2.6vw, 1.6rem); color: #4bd5ee; }
 .intro-logo {
   margin: 0 0 1rem;
@@ -87,7 +87,7 @@ h1, h2 { font-family: var(--titre); font-weight: 700; line-height: 1.15; margin:
 .episode, .episode-titre { text-align: center; }
 .episode-titre { font-size: 1.4em; font-weight: 700; }
 
-.js .intro { height: 600vh; }
+.js .intro { height: 800vh; }  /* plus de texte : plus de défilement */
 .js .intro-scene {
   position: sticky;
   top: 0;
@@ -116,33 +116,51 @@ h1, h2 { font-family: var(--titre); font-weight: 700; line-height: 1.15; margin:
   opacity: var(--logo-o, 0);
   transform: translate(-50%, -50%) scale(var(--logo-s, 2.6));
 }
-.js .defilement { position: absolute; inset: 0; perspective: 400px; overflow: hidden; }
+.js .defilement { position: absolute; inset: 0; perspective: 900px; overflow: hidden; }  /* perspective douce : le texte reste grand plus longtemps */
 .js .defilement-texte {
   position: absolute;
   top: 100%;
   left: 50%;
-  width: min(92vw, 16em);
+  width: min(96vw, 24em);  /* colonne large : le texte occupe l'écran */
   max-width: none;
   font-weight: 700;
-  font-size: clamp(1.6rem, 5vw, 3.2rem);
+  font-size: clamp(1.4rem, 4.2vw, 3rem);
   line-height: 1.4;
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
   transform-origin: 50% 100%;
   opacity: var(--texte-o, 0);
-  transform: translateX(-50%) rotateX(25deg) translateY(calc(var(--texte-y, 0) * -260%));
+  transform: translateX(-50%) rotateX(24deg) translateY(calc(var(--texte-y, 0) * -125%));
 }
-/* saut en hyperespace : des traits de lumière qui partent du centre et s'allongent */
+/* saut en hyperespace : des traits de lumière partent du centre, s'allongent et
+   s'intensifient (--hyper), un éclair blanc éclate (--eclair), puis tout s'efface
+   pour révéler la galaxie (--hyper-o redescend à 0) */
+.js .hyperespace, .js .hyperespace::after {
+  position: absolute;
+  inset: -60%;
+  -webkit-mask-image: radial-gradient(circle, transparent 0 6%, #000 50%);
+  mask-image: radial-gradient(circle, transparent 0 6%, #000 50%);
+}
 .js .hyperespace {
   display: block;
+  background: repeating-conic-gradient(from 0deg, transparent 0deg 2.6deg, rgba(200, 230, 255, 0.85) 2.6deg 2.85deg, transparent 2.85deg 5.3deg, rgba(255, 255, 255, 0.7) 5.3deg 5.45deg);
+  opacity: var(--hyper-o, 0);
+  transform: scale(calc(0.3 + var(--hyper, 0) * 2.2)) rotate(calc(var(--hyper, 0) * 6deg));
+  filter: brightness(calc(1 + var(--hyper, 0) * 1.5));
+}
+.js .hyperespace::after {
+  content: "";
+  inset: 0;
+  background: repeating-conic-gradient(from 1.3deg, transparent 0deg 3.4deg, rgba(120, 190, 255, 0.6) 3.4deg 3.6deg);
+  transform: scale(calc(1 + var(--hyper, 0) * 0.8));
+}
+.js .eclair {
+  display: block;
   position: absolute;
-  inset: -50%;
-  background:
-    radial-gradient(circle, var(--fond) 0 8%, transparent 30%),
-    repeating-conic-gradient(from 0deg, transparent 0deg 2.6deg, rgba(200, 230, 255, 0.75) 2.6deg 2.8deg, transparent 2.8deg 5.3deg, rgba(255, 255, 255, 0.5) 5.3deg 5.4deg);
-  -webkit-mask-image: radial-gradient(circle, transparent 0 10%, #000 55%);
-  mask-image: radial-gradient(circle, transparent 0 10%, #000 55%);
-  opacity: var(--hyper, 0);
-  transform: scale(calc(0.4 + var(--hyper, 0) * 1.2));
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(circle, #fff 0 30%, rgba(232, 245, 255, 0.97) 50%, rgba(170, 215, 255, 0.75) 72%, rgba(120, 180, 255, 0.35) 100%);
+  opacity: var(--eclair, 0);
 }
 .js .indice {
   display: block;
@@ -160,21 +178,6 @@ h1, h2 { font-family: var(--titre); font-weight: 700; line-height: 1.15; margin:
   animation: rebond 1.6s ease-in-out infinite;
 }
 @keyframes rebond { 50% { transform: translate(-50%, 6px); } }
-.js .passer {
-  display: block;
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  z-index: 2;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--jaune-doux);
-  border-radius: 4px;
-  color: var(--jaune);
-  font-family: var(--titre);
-  text-decoration: none;
-  background: rgba(0, 0, 0, 0.75);
-}
-.passer:hover { background: var(--jaune); color: #000; }
 
 /* ===== Barre de navigation (comme dans l'ébauche : noire, bordée de jaune) ===== */
 .barre {
