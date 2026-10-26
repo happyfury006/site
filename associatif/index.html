@@ -9,24 +9,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
 </head>
 <body>
-
-<!-- Générique d'ouverture : il disparaît seul à la fin, ou dès qu'on clique sur « Passer » -->
-<section class="intro" aria-label="Générique d'ouverture">
-  <p class="intro-debut">Il y a peu de temps, dans une école d'ingénieurs pas si lointaine…</p>
-  <p class="intro-logo">ZZ<br>WARS</p>
-  <div class="defilement" aria-hidden="true">
-    <div class="defilement-texte">
-      <p class="episode">Épisode IV</p>
-      <p class="episode-titre">UN NOUVEL ENGAGEMENT</p>
-      <p>Après des années de silence, le padawan JSG est entré au temple de l'ISIMA pour apprendre les usages de la Force informatique. Mais la Force ne se trouve pas seulement derrière un écran.</p>
-      <p>Pour tenir le rythme des heures de code, le jeune padawan a rejoint l'associatif de l'école. Il siège au conseil d'administration du Bureau des élèves, il a tenu les comptes d'un week-end d'accueil de vingt mille crédits, et il reconstruit le site du BDE.</p>
-      <p>Il a aussi cofondé sa propre faction : Drezzing, qui habille l'école à ses couleurs. Voici la carte de cette galaxie…</p>
-    </div>
-  </div>
-  <a class="passer" href="#galaxie">Passer l'intro ↓</a>
-</section>
 
 <!-- Barre de navigation, reprise de l'ébauche d'origine (fond noir, bordure jaune) -->
 <nav class="barre" aria-label="Navigation galaxie">
@@ -38,6 +23,29 @@
     <a href="/">Portfolio</a>
   </div>
 </nav>
+
+<!-- Introduction pilotée par le défilement, comme les pages produit d'Apple : en faisant
+     défiler, la phrase d'ouverture s'efface, le logo rétrécit, le texte s'éloigne en
+     perspective, puis un saut en hyperespace mène à la carte. Sans JavaScript, ou avec le
+     réglage « réduire les animations », elle s'affiche simplement comme du texte. -->
+<section class="intro" aria-label="Introduction">
+  <div class="intro-scene">
+    <div class="hyperespace" aria-hidden="true"></div>
+    <p class="intro-debut">Il y a peu de temps, dans une école d'ingénieurs pas si lointaine…</p>
+    <p class="intro-logo" aria-hidden="true">ZZ<br>WARS</p>
+    <div class="defilement">
+      <div class="defilement-texte">
+        <p class="episode">Épisode IV</p>
+        <p class="episode-titre">UN NOUVEL ENGAGEMENT</p>
+        <p>Après des années de silence, le padawan JSG est entré au temple de l'ISIMA pour apprendre les usages de la Force informatique. Mais la Force ne se trouve pas seulement derrière un écran.</p>
+        <p>Pour tenir le rythme des heures de code, le jeune padawan a rejoint l'associatif de l'école. Il siège au conseil d'administration du Bureau des élèves, il a tenu les comptes d'un week-end d'accueil de vingt mille crédits, et il reconstruit le site du BDE.</p>
+        <p>Il a aussi cofondé sa propre faction : Drezzing, qui habille l'école à ses couleurs. Voici la carte de cette galaxie…</p>
+      </div>
+    </div>
+    <p class="indice" aria-hidden="true">Faites défiler ↓</p>
+    <a class="passer" href="#galaxie">Passer l'intro ↓</a>
+  </div>
+</section>
 
 <header class="entete" id="galaxie">
   <p class="aurebesh" aria-hidden="true">galaxie associative</p>
@@ -52,20 +60,20 @@
   <div class="systeme-solaire">
     <div class="soleil" aria-hidden="true"><span>ISIMA</span><small>45.76° N · 3.11° E</small></div>
     <div class="orbite-planete orbite-bde">
-      <div class="porteur">
+      <div class="porteur" data-periode="140" data-depart="-150">
         <div class="sous-systeme sous-bde">
           <a class="planete planete-bde" href="#fiche-bde"><span>BDE</span></a>
-          <div class="orbite orbite-1"><a class="lune lune-ca" href="#fiche-ca" aria-label="Conseil d'administration"><span>Conseil d'admin.</span></a></div>
-          <div class="orbite orbite-2"><a class="lune lune-wea" href="#fiche-weekend"><span>Week-end d'accueil</span></a></div>
-          <div class="orbite orbite-3"><a class="lune lune-site" href="#fiche-site"><span>Site du BDE</span></a></div>
+          <div class="orbite orbite-1"><a class="lune lune-ca" data-periode="34" data-depart="-140" href="#fiche-ca" aria-label="Conseil d'administration"><span>Conseil d'admin.</span></a></div>
+          <div class="orbite orbite-2"><a class="lune lune-wea" data-periode="48" data-depart="-20" href="#fiche-weekend"><span>Week-end d'accueil</span></a></div>
+          <div class="orbite orbite-3"><a class="lune lune-site" data-periode="64" data-depart="110" href="#fiche-site"><span>Site du BDE</span></a></div>
         </div>
       </div>
     </div>
     <div class="orbite-planete orbite-drezzing">
-      <div class="porteur">
+      <div class="porteur" data-periode="220" data-depart="30">
         <div class="sous-systeme sous-drezzing">
           <a class="planete planete-drezzing" href="#fiche-drezzing"><span>Drezzing</span></a>
-          <div class="orbite orbite-1"><a class="lune lune-boutique" href="#fiche-boutique"><span>Boutique en ligne</span></a></div>
+          <div class="orbite orbite-1"><a class="lune lune-boutique" data-periode="40" data-depart="-50" href="#fiche-boutique"><span>Boutique en ligne</span></a></div>
         </div>
       </div>
     </div>

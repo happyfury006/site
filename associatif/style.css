@@ -64,79 +64,104 @@ h1, h2 { font-family: var(--titre); font-weight: 700; line-height: 1.15; margin:
   overflow-wrap: anywhere;  /* les mots en aurebesh sont larges : ils passent à la ligne sur téléphone */
 }
 
-/* ===== Générique d'ouverture (environ 45 secondes) =====
-   Fond translucide et clics qui traversent : la carte reste visible et cliquable
-   derrière le texte. Chaque étape commence quand la précédente est terminée. */
-.intro {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  overflow: hidden;
-  background: rgba(3, 4, 10, 0.6);
-  pointer-events: none;
-  animation: intro-fin 1.5s ease 45s forwards;
+/* ===== Introduction pilotée par le défilement =====
+   Sans JavaScript : un simple bloc de texte. Avec (classe .js) : une scène fixée à
+   l'écran pendant qu'on fait défiler une section haute ; script.js calcule la
+   progression et donne les valeurs --debut-o, --logo-s, --texte-y, --hyper… */
+.intro { position: relative; }
+.intro-scene { position: relative; padding: 40px 16px; text-align: center; }
+.hyperespace, .indice, .passer { display: none; }
+.intro-debut { margin: 0 auto 1rem; max-width: 26em; font-size: clamp(1.1rem, 2.6vw, 1.6rem); color: #4bd5ee; }
+.intro-logo {
+  margin: 0 0 1rem;
+  font-family: var(--titre);
+  font-weight: 700;
+  font-size: clamp(3rem, 10vw, 6rem);
+  line-height: 0.85;
+  letter-spacing: 0.08em;
+  color: transparent;
+  -webkit-text-stroke: 3px var(--jaune);
 }
-/* passé, ou une fiche ouverte : le générique n'a plus lieu d'être */
-body:has(:target) .intro { display: none; }
+.defilement-texte { max-width: 34em; margin: 0 auto; font-family: var(--titre); color: var(--jaune); text-align: justify; }
+.defilement-texte p { margin: 0 0 1.2em; }
+.episode, .episode-titre { text-align: center; }
+.episode-titre { font-size: 1.4em; font-weight: 700; }
 
-.intro-debut {                       /* 0,5 s → 5,5 s */
+.js .intro { height: 600vh; }
+.js .intro-scene {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 0;
+  overflow: hidden;
+}
+.js .intro-debut {
   position: absolute;
-  top: 40%;
+  top: 42%;
   left: 50%;
   width: min(90vw, 18em);
   margin: 0;
   transform: translate(-50%, -50%);
   font-size: clamp(1.2rem, 3vw, 2rem);
-  color: #4bd5ee;
-  opacity: 0;
-  animation: apparition 5s ease 0.5s;
+  text-align: left;
+  opacity: var(--debut-o, 1);
 }
-.intro-logo {                        /* 6 s → 13 s */
+.js .intro-logo {
   position: absolute;
   top: 50%;
   left: 50%;
   margin: 0;
-  font-family: var(--titre);
-  font-weight: 700;
   font-size: clamp(5rem, 18vw, 13rem);
-  line-height: 0.85;
-  letter-spacing: 0.08em;
-  text-align: center;
-  color: transparent;
-  -webkit-text-stroke: 4px var(--jaune);
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(2.6);
-  animation: logo 7s ease-in 6s;
+  -webkit-text-stroke-width: 4px;
+  opacity: var(--logo-o, 0);
+  transform: translate(-50%, -50%) scale(var(--logo-s, 2.6));
 }
-.defilement {                        /* 13 s → 45 s */
-  position: absolute;
-  inset: 0;
-  perspective: 400px;
-  overflow: hidden;
-}
-.defilement-texte {
+.js .defilement { position: absolute; inset: 0; perspective: 400px; overflow: hidden; }
+.js .defilement-texte {
   position: absolute;
   top: 100%;
   left: 50%;
   width: min(92vw, 16em);
-  font-family: var(--titre);
+  max-width: none;
   font-weight: 700;
   font-size: clamp(1.6rem, 5vw, 3.2rem);
   line-height: 1.4;
-  color: var(--jaune);
-  text-align: justify;
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
   transform-origin: 50% 100%;
-  transform: translateX(-50%) rotateX(25deg);
-  /* invisible tant qu'il n'a pas commencé : la perspective ferait remonter ses
-     premières lignes dans l'écran pendant le logo */
-  visibility: hidden;
-  animation: defiler 32s linear 13s forwards;
+  opacity: var(--texte-o, 0);
+  transform: translateX(-50%) rotateX(25deg) translateY(calc(var(--texte-y, 0) * -260%));
 }
-.defilement-texte p { margin: 0 0 1.2em; }
-.episode, .episode-titre { text-align: center; }
-.episode-titre { font-size: 1.4em; }
-.passer {
+/* saut en hyperespace : des traits de lumière qui partent du centre et s'allongent */
+.js .hyperespace {
+  display: block;
+  position: absolute;
+  inset: -50%;
+  background:
+    radial-gradient(circle, var(--fond) 0 8%, transparent 30%),
+    repeating-conic-gradient(from 0deg, transparent 0deg 2.6deg, rgba(200, 230, 255, 0.75) 2.6deg 2.8deg, transparent 2.8deg 5.3deg, rgba(255, 255, 255, 0.5) 5.3deg 5.4deg);
+  -webkit-mask-image: radial-gradient(circle, transparent 0 10%, #000 55%);
+  mask-image: radial-gradient(circle, transparent 0 10%, #000 55%);
+  opacity: var(--hyper, 0);
+  transform: scale(calc(0.4 + var(--hyper, 0) * 1.2));
+}
+.js .indice {
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  margin: 0;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--jaune);
+  opacity: var(--indice-o, 1);
+  animation: rebond 1.6s ease-in-out infinite;
+}
+@keyframes rebond { 50% { transform: translate(-50%, 6px); } }
+.js .passer {
+  display: block;
   position: absolute;
   right: 20px;
   bottom: 20px;
@@ -148,21 +173,8 @@ body:has(:target) .intro { display: none; }
   font-family: var(--titre);
   text-decoration: none;
   background: rgba(0, 0, 0, 0.75);
-  pointer-events: auto;
 }
 .passer:hover { background: var(--jaune); color: #000; }
-
-@keyframes apparition { 0%, 100% { opacity: 0; } 15%, 80% { opacity: 1; } }
-@keyframes logo {
-  0% { opacity: 1; transform: translate(-50%, -50%) scale(2.6); }
-  85% { opacity: 1; }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.05); }
-}
-@keyframes defiler {
-  from { visibility: visible; transform: translateX(-50%) rotateX(25deg) translateY(0); }
-  to { visibility: visible; transform: translateX(-50%) rotateX(25deg) translateY(-260%); }
-}
-@keyframes intro-fin { to { opacity: 0; visibility: hidden; } }
 
 /* ===== Barre de navigation (comme dans l'ébauche : noire, bordée de jaune) ===== */
 .barre {
@@ -208,15 +220,6 @@ body:has(:target) .intro { display: none; }
   margin: 0 auto;
   padding: 40px 16px 8px;
   text-align: center;
-  overflow: hidden;
-  /* replié pendant le générique : son texte ne se superpose pas au défilement, et le
-     système solaire occupe l'écran ; il se déplie à la fin du générique */
-  animation: entete-apparait 1.2s ease 45s both;
-}
-body:has(:target) .entete { animation: none; }
-@keyframes entete-apparait {
-  from { max-height: 0; padding-top: 0; padding-bottom: 0; opacity: 0; }
-  to { max-height: 520px; opacity: 1; }
 }
 .entete .aurebesh { margin: 0 0 0.6rem; font-size: clamp(0.85rem, 3.4vw, 1.3rem); }
 .entete h1 {
@@ -287,22 +290,27 @@ body:has(:target) .entete { animation: none; }
   aspect-ratio: 1;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  animation: tourner var(--duree) linear infinite var(--depart);
   pointer-events: none;  /* le cercle ne bloque pas les clics ; seuls les astres sont cliquables */
 }
 .orbite-planete { border: 1px dashed rgba(255, 232, 31, 0.18); }
 .orbite { border: 1px dashed rgba(255, 255, 255, 0.16); z-index: 3; }
-.orbite-bde { width: 46cqw; --duree: 140s; --depart: -35s; }
-.orbite-drezzing { width: 84cqw; --duree: 220s; --depart: -150s; }
+.orbite-bde { width: 46cqw; }
+.orbite-drezzing { width: 84cqw; }
 
-/* le porteur est accroché en haut de l'orbite de la planète et la garde droite */
-.porteur {
+/* chaque astre est placé sur son cercle selon son angle --a : script.js le fait
+   avancer à chaque image ; sans script, les angles ci-dessous restent fixes */
+.porteur, .lune {
   position: absolute;
-  top: 0;
-  left: 50%;
+  left: calc(50% + 50% * cos(var(--a)));
+  top: calc(50% + 50% * sin(var(--a)));
   transform: translate(-50%, -50%);
-  animation: contre-tourner var(--duree) linear infinite var(--depart);
 }
+.orbite-bde .porteur { --a: -150deg; }
+.orbite-drezzing .porteur { --a: 30deg; }
+.lune-ca { --a: -140deg; }
+.lune-wea { --a: -20deg; }
+.lune-site { --a: 110deg; }
+.lune-boutique { --a: -50deg; }
 .sous-systeme { position: relative; aspect-ratio: 1; }
 .sous-bde { width: 22cqw; }
 .sous-drezzing { width: 14cqw; }
@@ -343,18 +351,14 @@ body:has(:target) .entete { animation: none; }
 .planete-bde:hover, .planete-bde:focus-visible { box-shadow: 0 0 0 3px #ff5a3c, 0 0 30px 8px rgba(255, 90, 60, 0.6); }
 .planete-drezzing:hover, .planete-drezzing:focus-visible { box-shadow: 0 0 0 3px var(--sabre-bleu), 0 0 30px 8px rgba(79, 195, 255, 0.6); }
 
-.sous-bde .orbite-1 { width: 56%; --duree: 34s; --depart: -4s; }
-.sous-bde .orbite-2 { width: 78%; --duree: 48s; --depart: -30s; }
-.sous-bde .orbite-3 { width: 100%; --duree: 64s; --depart: -52s; }
-.sous-drezzing .orbite-1 { width: 100%; --duree: 40s; --depart: -10s; }
+.sous-bde .orbite-1 { width: 56%; }
+.sous-bde .orbite-2 { width: 78%; }
+.sous-bde .orbite-3 { width: 100%; }
+.sous-drezzing .orbite-1 { width: 100%; }
 
 .lune {
-  top: 0;
-  left: 50%;
   width: clamp(22px, 3.6cqw, 40px);
   aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  animation: contre-tourner var(--duree) linear infinite var(--depart);
 }
 .lune span {
   position: absolute;
@@ -375,11 +379,6 @@ body:has(:target) .entete { animation: none; }
 .lune-site { background: radial-gradient(circle at 35% 30%, #ddd0ff, #7d63d9 55%, #2b1f61); }
 .lune-boutique { background: radial-gradient(circle at 35% 30%, #d6ffe6, #48b37c 55%, #134a30); }
 
-@keyframes tourner { to { transform: translate(-50%, -50%) rotate(360deg); } }
-@keyframes contre-tourner {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(-360deg); }
-}
 
 /* sur un petit écran, les noms des lunes encombreraient : la liste ci-dessous les reprend */
 @container (max-width: 560px) {
@@ -511,17 +510,8 @@ body:has(:target) .entete { animation: none; }
 .pied .aurebesh { margin: 0.4rem 0; font-size: clamp(0.7rem, 2.8vw, 0.95rem); }
 .clin-oeil { font-size: 0.8rem; opacity: 0.7; }
 
-/* ===== Mouvement réduit : pas de générique, astres immobiles à des positions distinctes ===== */
+/* ===== Mouvement réduit : script.js ne s'active pas (page immobile, intro en texte) ===== */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .intro { display: none; }
-  .orbite-planete, .orbite, .porteur, .lune, .soleil, .sabre-lame, .fiche-cadre { animation: none; }
-  .orbite-planete, .orbite { transform: translate(-50%, -50%) rotate(var(--angle, 0deg)); }
-  .porteur, .lune { transform: translate(-50%, -50%) rotate(calc(-1 * var(--angle, 0deg))); }
-  .orbite-bde { --angle: -60deg; }
-  .orbite-drezzing { --angle: 120deg; }
-  .sous-bde .orbite-1 { --angle: -50deg; }
-  .sous-bde .orbite-2 { --angle: 70deg; }
-  .sous-bde .orbite-3 { --angle: 200deg; }
-  .sous-drezzing .orbite-1 { --angle: 40deg; }
+  .soleil, .sabre-lame, .fiche-cadre { animation: none; }
 }
