@@ -1,5 +1,8 @@
 /* ZZ Wars : la galaxie associative. Aucune ligne de JavaScript : le générique est
-   une animation CSS, et les fiches s'ouvrent avec :target (l'adresse #fiche-…). */
+   une animation CSS, et les fiches s'ouvrent avec :target (l'adresse #fiche-…).
+   Deux univers mêlés : l'ébauche Star Wars d'origine (jaune, barre noire bordée de jaune,
+   aurebesh, sabres laser, transmissions holographiques) et l'esprit spatial du portfolio
+   (police technique, coordonnées façon tableau de bord, ciel étoilé). */
 
 @font-face {
   font-family: "Galactic Basic";
@@ -12,15 +15,19 @@
   --texte: #e6ebf5;
   --texte-doux: #9aa6bf;
   --jaune: #ffe81f;
+  --jaune-doux: rgba(255, 232, 31, 0.35);
   --cyan: #62e3ff;
-  --cadre: #0b1020;
+  --holo: #7fe3ff;
+  --cadre: rgba(8, 14, 28, 0.96);
+  --sabre-bleu: #4fc3ff;
   --titre: "Chakra Petch", "Segoe UI", sans-serif;
   --corps: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
   color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 70px; }
 body {
   margin: 0;
   min-height: 100vh;
@@ -42,27 +49,37 @@ body::before {
     radial-gradient(1px 1px at 210px 210px, rgba(255, 255, 255, 0.6), transparent),
     radial-gradient(1px 1px at 260px 40px, #fff, transparent),
     radial-gradient(1.5px 1.5px at 40px 250px, #ffe9b3, transparent),
-    radial-gradient(ellipse 70% 50% at 75% 0%, rgba(60, 80, 180, 0.25), transparent 70%);
-  background-size: 280px 280px, 280px 280px, 280px 280px, 280px 280px, 280px 280px, 280px 280px, 100% 100%;
+    radial-gradient(ellipse 70% 50% at 75% 0%, rgba(60, 80, 180, 0.25), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 10% 100%, rgba(120, 40, 160, 0.18), transparent 70%);
+  background-size: 280px 280px, 280px 280px, 280px 280px, 280px 280px, 280px 280px, 280px 280px, 100% 100%, 100% 100%;
 }
 a { color: var(--cyan); }
 a:hover { color: var(--jaune); }
 :focus-visible { outline: 2px solid var(--jaune); outline-offset: 4px; }
 h1, h2 { font-family: var(--titre); font-weight: 700; line-height: 1.15; margin: 0 0 0.5em; }
+.aurebesh {
+  font-family: "Galactic Basic", var(--titre);
+  letter-spacing: 0.1em;
+  color: rgba(255, 232, 31, 0.7);
+  overflow-wrap: anywhere;  /* les mots en aurebesh sont larges : ils passent à la ligne sur téléphone */
+}
 
-/* ===== Générique d'ouverture (environ 40 secondes) ===== */
+/* ===== Générique d'ouverture (environ 45 secondes) =====
+   Fond translucide et clics qui traversent : la carte reste visible et cliquable
+   derrière le texte. Chaque étape commence quand la précédente est terminée. */
 .intro {
   position: fixed;
   inset: 0;
   z-index: 50;
   overflow: hidden;
-  background: var(--fond);
-  animation: intro-fin 1s ease 40s forwards;
+  background: rgba(3, 4, 10, 0.6);
+  pointer-events: none;
+  animation: intro-fin 1.5s ease 45s forwards;
 }
 /* passé, ou une fiche ouverte : le générique n'a plus lieu d'être */
 body:has(:target) .intro { display: none; }
 
-.intro-debut {
+.intro-debut {                       /* 0,5 s → 5,5 s */
   position: absolute;
   top: 40%;
   left: 50%;
@@ -71,11 +88,10 @@ body:has(:target) .intro { display: none; }
   transform: translate(-50%, -50%);
   font-size: clamp(1.2rem, 3vw, 2rem);
   color: #4bd5ee;
-  text-align: left;
   opacity: 0;
   animation: apparition 5s ease 0.5s;
 }
-.intro-logo {
+.intro-logo {                        /* 6 s → 13 s */
   position: absolute;
   top: 50%;
   left: 50%;
@@ -90,9 +106,9 @@ body:has(:target) .intro { display: none; }
   -webkit-text-stroke: 4px var(--jaune);
   opacity: 0;
   transform: translate(-50%, -50%) scale(2.6);
-  animation: logo 8s ease-in 6s;
+  animation: logo 7s ease-in 6s;
 }
-.defilement {
+.defilement {                        /* 13 s → 45 s */
   position: absolute;
   inset: 0;
   perspective: 400px;
@@ -109,9 +125,10 @@ body:has(:target) .intro { display: none; }
   line-height: 1.4;
   color: var(--jaune);
   text-align: justify;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
   transform-origin: 50% 100%;
   transform: translateX(-50%) rotateX(25deg);
-  animation: defiler 32s linear 9s forwards;
+  animation: defiler 32s linear 13s forwards;
 }
 .defilement-texte p { margin: 0 0 1.2em; }
 .episode, .episode-titre { text-align: center; }
@@ -122,19 +139,20 @@ body:has(:target) .intro { display: none; }
   bottom: 20px;
   z-index: 2;
   padding: 0.5rem 1rem;
-  border: 1px solid rgba(255, 232, 31, 0.6);
+  border: 1px solid var(--jaune-doux);
   border-radius: 4px;
   color: var(--jaune);
   font-family: var(--titre);
   text-decoration: none;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.75);
+  pointer-events: auto;
 }
 .passer:hover { background: var(--jaune); color: #000; }
 
 @keyframes apparition { 0%, 100% { opacity: 0; } 15%, 80% { opacity: 1; } }
 @keyframes logo {
   0% { opacity: 1; transform: translate(-50%, -50%) scale(2.6); }
-  90% { opacity: 1; }
+  85% { opacity: 1; }
   100% { opacity: 0; transform: translate(-50%, -50%) scale(0.05); }
 }
 @keyframes defiler {
@@ -143,47 +161,148 @@ body:has(:target) .intro { display: none; }
 }
 @keyframes intro-fin { to { opacity: 0; visibility: hidden; } }
 
-/* ===== En-tête ===== */
+/* ===== Barre de navigation (comme dans l'ébauche : noire, bordée de jaune) ===== */
+.barre {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding: 10px 18px;
+  background: rgba(0, 0, 0, 0.92);
+  border-bottom: 2px solid var(--jaune);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+}
+.barre-titre {
+  font-family: var(--titre);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.12em;
+  color: var(--jaune);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.barre-titre .aurebesh { margin-right: 0.6rem; font-size: 0.9rem; }
+.barre-liens { display: flex; flex-wrap: wrap; gap: 0.3rem 1.4rem; }
+.barre-liens a {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--texte-doux);
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+.barre-liens a:hover { color: var(--jaune); border-bottom-color: var(--jaune); }
+
+/* ===== En-tête : titre façon logo, lettres jaunes évidées ===== */
 .entete {
   max-width: 960px;
   margin: 0 auto;
-  padding: 48px 16px 16px;
+  padding: 40px 16px 8px;
   text-align: center;
+  overflow: hidden;
+  /* replié pendant le générique : son texte ne se superpose pas au défilement, et le
+     système solaire occupe l'écran ; il se déplie à la fin du générique */
+  animation: entete-apparait 1.2s ease 45s both;
 }
-.retour {
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  font-family: var(--titre);
-  text-decoration: none;
+body:has(:target) .entete { animation: none; }
+@keyframes entete-apparait {
+  from { max-height: 0; padding-top: 0; padding-bottom: 0; opacity: 0; }
+  to { max-height: 520px; opacity: 1; }
 }
-.aurebesh {
-  margin: 0 0 0.4rem;
-  font-family: "Galactic Basic", var(--titre);
-  font-size: 1.4rem;
-  letter-spacing: 0.1em;
-  color: rgba(255, 232, 31, 0.7);
+.entete .aurebesh { margin: 0 0 0.6rem; font-size: clamp(0.85rem, 3.4vw, 1.3rem); }
+.entete h1 {
+  font-size: clamp(2.4rem, 7vw, 4.6rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--jaune);
+  text-shadow: 0 0 30px rgba(255, 232, 31, 0.25);
 }
-.entete h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); color: var(--jaune); }
 .sous-titre { margin: 0 auto; max-width: 38em; color: var(--texte-doux); }
 
-/* ===== Carte de la galaxie ===== */
-.carte {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 24px 64px;
-  max-width: 1200px;
-  margin: 24px auto 0;
-  padding: 0 16px;
+/* sabre laser : poignée grise, lame lumineuse qui s'allume au chargement */
+.sabre { display: flex; align-items: center; justify-content: center; margin: 4px auto 22px; height: 12px; }
+.sabre-poignee {
+  width: 46px;
+  height: 10px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(90deg, #8c929c 0 6px, #3a3f47 6px 8px);
 }
-.systeme {
+.sabre-lame {
+  width: min(320px, 60vw);
+  height: 5px;
+  border-radius: 0 4px 4px 0;
+  background: #f4fbff;
+  box-shadow: 0 0 6px 2px var(--sabre-bleu), 0 0 18px 4px rgba(79, 195, 255, 0.55);
+  transform-origin: left center;
+  animation: allumer 0.9s ease-out 0.3s both;
+}
+@keyframes allumer { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* ===== Système solaire =====
+   Les tailles sont en cqw (% de la largeur du système) : tout reste proportionné.
+   Une orbite est un cercle qui tourne ; ce qu'elle porte (planète ou lune) tourne en
+   sens inverse à la même vitesse pour rester droit et lisible. */
+.systeme-solaire {
   position: relative;
-  width: min(560px, 92vw);
+  width: min(1000px, 96vw, calc(100vh - 64px));  /* tient dans la hauteur de l'écran */
   aspect-ratio: 1;
+  margin: 8px auto 0;
+  container-type: inline-size;
 }
-.systeme-drezzing { width: min(400px, 80vw); }
+.soleil {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12cqw;
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 40% 38%, #fffbe0, #ffe36b 35%, #f7a823 70%, #c25e0a);
+  box-shadow: 0 0 40px 10px rgba(255, 210, 80, 0.55), 0 0 120px 40px rgba(255, 170, 40, 0.25);
+  animation: pulser 6s ease-in-out infinite;
+}
+.soleil span { font-family: var(--titre); font-weight: 700; font-size: clamp(0.7rem, 1.8cqw, 1.2rem); color: #5a2a00; letter-spacing: 0.08em; }
+.soleil small { font-family: var(--mono); font-size: clamp(0.45rem, 0.9cqw, 0.65rem); color: #7a3d05; }
+@keyframes pulser {
+  50% { box-shadow: 0 0 55px 14px rgba(255, 210, 80, 0.65), 0 0 140px 50px rgba(255, 170, 40, 0.3); }
+}
+
+.orbite-planete, .orbite {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: tourner var(--duree) linear infinite var(--depart);
+  pointer-events: none;  /* le cercle ne bloque pas les clics ; seuls les astres sont cliquables */
+}
+.orbite-planete { border: 1px dashed rgba(255, 232, 31, 0.18); }
+.orbite { border: 1px dashed rgba(255, 255, 255, 0.16); z-index: 3; }
+.orbite-bde { width: 46cqw; --duree: 140s; --depart: -35s; }
+.orbite-drezzing { width: 84cqw; --duree: 220s; --depart: -150s; }
+
+/* le porteur est accroché en haut de l'orbite de la planète et la garde droite */
+.porteur {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: contre-tourner var(--duree) linear infinite var(--depart);
+}
+.sous-systeme { position: relative; aspect-ratio: 1; }
+.sous-bde { width: 22cqw; }
+.sous-drezzing { width: 14cqw; }
 
 .planete, .lune {
   position: absolute;
@@ -194,77 +313,64 @@ body:has(:target) .intro { display: none; }
   color: #fff;
   font-family: var(--titre);
   font-weight: 700;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  pointer-events: auto;
 }
 .planete {
   top: 50%;
   left: 50%;
-  width: 32%;
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
-  font-size: clamp(1.1rem, 3vw, 1.6rem);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-  z-index: 2;
+  font-size: clamp(0.8rem, 2.2cqw, 1.5rem);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  z-index: 4;  /* devant ses lunes : une lune passe derrière sa planète */
+  transition: box-shadow 0.25s ease, filter 0.25s ease;
 }
-.planete:hover, .planete:focus-visible { transform: translate(-50%, -50%) scale(1.06); color: #fff; }
-.systeme-drezzing .planete { width: 38%; }
+.sous-bde .planete { width: 34%; }
+.sous-drezzing .planete { width: 46%; }
+.planete:hover, .planete:focus-visible { color: #fff; filter: brightness(1.15); }
 .planete-bde {
   background: radial-gradient(circle at 34% 30%, #ffe1a1, #f0913f 42%, #8c3514 78%, #3b1206);
-  box-shadow: 0 0 60px rgba(240, 145, 63, 0.45), inset -18px -18px 40px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 40px rgba(240, 145, 63, 0.45), inset -14px -14px 30px rgba(0, 0, 0, 0.5);
 }
 .planete-drezzing {
   background: radial-gradient(circle at 34% 30%, #d4f6ff, #4ab3d6 42%, #1b5c86 76%, #0a2238);
-  box-shadow: 0 0 60px rgba(74, 179, 214, 0.45), inset -16px -16px 36px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 40px rgba(74, 179, 214, 0.45), inset -12px -12px 26px rgba(0, 0, 0, 0.5);
 }
+/* survol d'une planète : halo de sabre laser */
+.planete-bde:hover, .planete-bde:focus-visible { box-shadow: 0 0 0 3px #ff5a3c, 0 0 30px 8px rgba(255, 90, 60, 0.6); }
+.planete-drezzing:hover, .planete-drezzing:focus-visible { box-shadow: 0 0 0 3px var(--sabre-bleu), 0 0 30px 8px rgba(79, 195, 255, 0.6); }
 
-/* une orbite = un cercle centré qui tourne ; la lune est accrochée en haut du cercle
-   et tourne en sens inverse pour que son nom reste lisible */
-.orbite {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  aspect-ratio: 1;
-  border: 1px dashed rgba(255, 255, 255, 0.18);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  animation: tourner var(--duree) linear infinite var(--depart);
-  z-index: 3;             /* les lunes et leurs noms passent devant la planète */
-  pointer-events: none;   /* le cercle de l'orbite ne bloque pas les clics sur la planète */
-}
-.systeme-bde .orbite-1 { width: 52%; --duree: 36s; --depart: -4s; }
-.systeme-bde .orbite-2 { width: 74%; --duree: 52s; --depart: -30s; }
-.systeme-bde .orbite-3 { width: 96%; --duree: 70s; --depart: -58s; }
-.systeme-drezzing .orbite-1 { width: 88%; --duree: 44s; --depart: -10s; }
+.sous-bde .orbite-1 { width: 56%; --duree: 34s; --depart: -4s; }
+.sous-bde .orbite-2 { width: 78%; --duree: 48s; --depart: -30s; }
+.sous-bde .orbite-3 { width: 100%; --duree: 64s; --depart: -52s; }
+.sous-drezzing .orbite-1 { width: 100%; --duree: 40s; --depart: -10s; }
 
 .lune {
   top: 0;
   left: 50%;
-  width: clamp(44px, 9vw, 64px);
+  width: clamp(22px, 3.6cqw, 40px);
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
   animation: contre-tourner var(--duree) linear infinite var(--depart);
-  pointer-events: auto;
 }
 .lune span {
   position: absolute;
   top: 100%;
-  margin-top: 6px;
-  padding: 2px 8px;
-  border-radius: 4px;
-  background: rgba(3, 4, 10, 0.75);
-  font-size: 0.85rem;
-  font-weight: 500;
+  margin-top: 4px;
+  padding: 1px 7px;
+  border: 1px solid rgba(255, 232, 31, 0.25);
+  border-radius: 3px;
+  background: rgba(3, 4, 10, 0.8);
+  font-family: var(--mono);
+  font-size: clamp(0.6rem, 1.2cqw, 0.75rem);
+  font-weight: 400;
   white-space: nowrap;
 }
-.lune:hover, .lune:focus-visible { box-shadow: 0 0 0 3px var(--jaune), 0 0 24px rgba(255, 232, 31, 0.5); color: var(--jaune); }
+.lune:hover, .lune:focus-visible { box-shadow: 0 0 0 3px #39ff7a, 0 0 22px rgba(57, 255, 122, 0.6); color: #fff; }
 .lune-ca { background: radial-gradient(circle at 35% 30%, #f1ece0, #9b9484 55%, #3d3a33); }
 .lune-wea { background: radial-gradient(circle at 35% 30%, #fff0c2, #d29a3c 55%, #5b3a0e); }
 .lune-site { background: radial-gradient(circle at 35% 30%, #ddd0ff, #7d63d9 55%, #2b1f61); }
 .lune-boutique { background: radial-gradient(circle at 35% 30%, #d6ffe6, #48b37c 55%, #134a30); }
-
-/* au survol ou au clavier, le système s'arrête : plus facile de viser une lune */
-.systeme:hover .orbite, .systeme:hover .lune,
-.systeme:focus-within .orbite, .systeme:focus-within .lune { animation-play-state: paused; }
 
 @keyframes tourner { to { transform: translate(-50%, -50%) rotate(360deg); } }
 @keyframes contre-tourner {
@@ -272,85 +378,147 @@ body:has(:target) .intro { display: none; }
   to { transform: translate(-50%, -50%) rotate(-360deg); }
 }
 
+/* sur un petit écran, les noms des lunes encombreraient : la liste ci-dessous les reprend */
+@container (max-width: 560px) {
+  .lune span { display: none; }
+}
+
 /* ===== Liste des fiches ===== */
 .liste {
   max-width: 560px;
-  margin: 32px auto 0;
+  margin: 24px auto 0;
   padding: 0 16px;
 }
-.liste h2 { font-size: 1.1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--texte-doux); }
+.liste h2 {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--jaune);
+}
 .liste ul { margin: 0; padding-left: 1.2rem; }
 .liste li { margin: 0.3rem 0; }
+.liste li::marker { color: var(--jaune); }
 
-/* ===== Fiches (ouvertes avec :target) ===== */
+/* ===== Fiches : transmissions holographiques (ouvertes avec :target) ===== */
 .fiche {
   position: fixed;
   inset: 0;
-  z-index: 40;
+  z-index: 60;
   display: none;
   place-items: center;
   padding: 16px;
-  background: rgba(3, 4, 10, 0.78);
+  background: rgba(3, 4, 10, 0.8);
   backdrop-filter: blur(4px);
 }
 .fiche:target { display: grid; }
 .fiche-cadre {
   position: relative;
-  width: min(640px, 100%);
+  width: min(660px, 100%);
   max-height: calc(100vh - 32px);
   overflow-y: auto;
-  padding: 32px 28px 24px;
-  border: 1px solid rgba(255, 232, 31, 0.35);
-  border-radius: 8px;
-  background: var(--cadre);
-  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+  padding: 56px 30px 26px;
+  border: 1px solid var(--jaune-doux);
+  background:
+    repeating-linear-gradient(0deg, rgba(127, 227, 255, 0.035) 0 1px, transparent 1px 3px),
+    var(--cadre);
+  box-shadow: 0 0 0 1px rgba(127, 227, 255, 0.12) inset, 0 20px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(127, 227, 255, 0.08);
+  animation: transmission 0.45s ease-out;
 }
-.fiche h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); color: var(--jaune); }
+/* bandeau de transmission en haut de la fiche */
+.fiche-cadre::before {
+  content: "◉ Transmission entrante";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 30px;
+  border-bottom: 1px solid var(--jaune-doux);
+  background: rgba(255, 232, 31, 0.08);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--jaune);
+}
+/* coins du cadre, façon écran de console */
+.fiche-cadre::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--jaune), var(--jaune)) top left / 16px 2px,
+    linear-gradient(var(--jaune), var(--jaune)) top left / 2px 16px,
+    linear-gradient(var(--jaune), var(--jaune)) bottom right / 16px 2px,
+    linear-gradient(var(--jaune), var(--jaune)) bottom right / 2px 16px;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+}
+@keyframes transmission {
+  from { opacity: 0; transform: scaleY(0.04); filter: brightness(2); }
+  60% { opacity: 1; transform: scaleY(1.02); }
+  to { transform: none; filter: none; }
+}
+.fiche h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); color: var(--jaune); text-transform: uppercase; letter-spacing: 0.03em; }
 .fiche-type {
   margin: 0 0 0.4rem;
-  font-family: var(--titre);
-  font-size: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--texte-doux);
+  color: var(--holo);
 }
 .role { font-family: var(--titre); color: var(--cyan); margin-top: -0.3rem; }
 .chiffre strong { font-family: var(--titre); font-size: 2.4rem; color: var(--jaune); margin-right: 0.3rem; }
 .chiffre { color: var(--texte-doux); }
 .fiche ul { padding-left: 1.2rem; }
 .fiche li { margin: 0.25rem 0; }
+.fiche li::marker { color: var(--jaune); }
+/* liens des fiches : soulignés d'une lame de sabre */
+.fiche-cadre a:not(.fermer) {
+  text-decoration: none;
+  border-bottom: 2px solid rgba(79, 195, 255, 0.5);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.fiche-cadre a:not(.fermer):hover { color: #fff; border-bottom-color: var(--sabre-bleu); box-shadow: 0 6px 10px -6px var(--sabre-bleu); }
 .fermer {
   position: absolute;
-  top: 10px;
-  right: 14px;
-  font-size: 1.8rem;
-  line-height: 1;
+  top: 2px;
+  right: 12px;
+  z-index: 1;
+  font-size: 1.6rem;
+  line-height: 1.4;
   text-decoration: none;
-  color: var(--texte-doux);
+  color: var(--jaune);
 }
+.fermer:hover { color: #ff5a3c; }
 .retour-carte { margin-top: 1.4rem; font-size: 0.95rem; }
 
 /* ===== Pied de page ===== */
 .pied {
-  margin-top: 56px;
+  margin-top: 40px;
   padding: 24px 16px 32px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 2px solid var(--jaune);
+  background: rgba(0, 0, 0, 0.6);
   text-align: center;
   color: var(--texte-doux);
   font-size: 0.9rem;
 }
+.pied .aurebesh { margin: 0.4rem 0; font-size: clamp(0.7rem, 2.8vw, 0.95rem); }
 .clin-oeil { font-size: 0.8rem; opacity: 0.7; }
 
-/* ===== Mouvement réduit : pas de générique ni d'orbites qui tournent ===== */
+/* ===== Mouvement réduit : pas de générique, astres immobiles à des positions distinctes ===== */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .intro { display: none; }
-  .orbite, .lune { animation: none; }
-  /* lunes immobiles, chacune à un angle différent pour que leurs noms ne se chevauchent pas */
-  .orbite { transform: translate(-50%, -50%) rotate(var(--angle, 0deg)); }
-  .lune { transform: translate(-50%, -50%) rotate(calc(-1 * var(--angle, 0deg))); }
-  .systeme-bde .orbite-1 { --angle: -50deg; }
-  .systeme-bde .orbite-2 { --angle: 60deg; }
-  .systeme-bde .orbite-3 { --angle: 200deg; }
-  .systeme-drezzing .orbite-1 { --angle: 40deg; }
+  .orbite-planete, .orbite, .porteur, .lune, .soleil, .sabre-lame, .fiche-cadre { animation: none; }
+  .orbite-planete, .orbite { transform: translate(-50%, -50%) rotate(var(--angle, 0deg)); }
+  .porteur, .lune { transform: translate(-50%, -50%) rotate(calc(-1 * var(--angle, 0deg))); }
+  .orbite-bde { --angle: -60deg; }
+  .orbite-drezzing { --angle: 120deg; }
+  .sous-bde .orbite-1 { --angle: -50deg; }
+  .sous-bde .orbite-2 { --angle: 70deg; }
+  .sous-bde .orbite-3 { --angle: 200deg; }
+  .sous-drezzing .orbite-1 { --angle: 40deg; }
 }

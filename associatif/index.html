@@ -7,7 +7,7 @@
 <meta name="description" content="Mon engagement associatif à l'ISIMA : conseil d'administration du BDE, trésorier du week-end d'accueil, refonte du site du BDE et cofondation de l'association Drezzing.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,25 +28,46 @@
   <a class="passer" href="#galaxie">Passer l'intro ↓</a>
 </section>
 
+<!-- Barre de navigation, reprise de l'ébauche d'origine (fond noir, bordure jaune) -->
+<nav class="barre" aria-label="Navigation galaxie">
+  <a class="barre-titre" href="#galaxie"><span class="aurebesh" aria-hidden="true">zz wars</span> ZZ Wars</a>
+  <div class="barre-liens">
+    <a href="#galaxie">Carte</a>
+    <a href="#fiche-bde">BDE</a>
+    <a href="#fiche-drezzing">Drezzing</a>
+    <a href="/">Portfolio</a>
+  </div>
+</nav>
+
 <header class="entete" id="galaxie">
-  <a class="retour" href="/">← Portfolio</a>
   <p class="aurebesh" aria-hidden="true">galaxie associative</p>
   <h1>La galaxie associative</h1>
+  <div class="sabre" aria-hidden="true"><span class="sabre-poignee"></span><span class="sabre-lame"></span></div>
   <p class="sous-titre">Mon engagement à l'ISIMA, planète par planète. Cliquez sur une planète ou une lune pour ouvrir sa fiche.</p>
 </header>
 
 <main>
-  <!-- Carte : chaque astre est un lien vers sa fiche (#fiche-…), ouverte en CSS avec :target -->
-  <div class="carte" role="list">
-    <div class="systeme systeme-bde" role="listitem">
-      <a class="planete planete-bde" href="#fiche-bde"><span>BDE</span></a>
-      <div class="orbite orbite-1"><a class="lune lune-ca" href="#fiche-ca"><span>Conseil d'administration</span></a></div>
-      <div class="orbite orbite-2"><a class="lune lune-wea" href="#fiche-weekend"><span>Week-end d'accueil</span></a></div>
-      <div class="orbite orbite-3"><a class="lune lune-site" href="#fiche-site"><span>Site du BDE</span></a></div>
+  <!-- Carte : le soleil ISIMA au centre, les planètes BDE et Drezzing en orbite, chacune avec
+       ses lunes. Chaque astre est un lien vers sa fiche (#fiche-…), ouverte en CSS avec :target -->
+  <div class="systeme-solaire">
+    <div class="soleil" aria-hidden="true"><span>ISIMA</span><small>45.76° N · 3.11° E</small></div>
+    <div class="orbite-planete orbite-bde">
+      <div class="porteur">
+        <div class="sous-systeme sous-bde">
+          <a class="planete planete-bde" href="#fiche-bde"><span>BDE</span></a>
+          <div class="orbite orbite-1"><a class="lune lune-ca" href="#fiche-ca" aria-label="Conseil d'administration"><span>Conseil d'admin.</span></a></div>
+          <div class="orbite orbite-2"><a class="lune lune-wea" href="#fiche-weekend"><span>Week-end d'accueil</span></a></div>
+          <div class="orbite orbite-3"><a class="lune lune-site" href="#fiche-site"><span>Site du BDE</span></a></div>
+        </div>
+      </div>
     </div>
-    <div class="systeme systeme-drezzing" role="listitem">
-      <a class="planete planete-drezzing" href="#fiche-drezzing"><span>Drezzing</span></a>
-      <div class="orbite orbite-1"><a class="lune lune-boutique" href="#fiche-boutique"><span>Boutique en ligne</span></a></div>
+    <div class="orbite-planete orbite-drezzing">
+      <div class="porteur">
+        <div class="sous-systeme sous-drezzing">
+          <a class="planete planete-drezzing" href="#fiche-drezzing"><span>Drezzing</span></a>
+          <div class="orbite orbite-1"><a class="lune lune-boutique" href="#fiche-boutique"><span>Boutique en ligne</span></a></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -160,6 +181,7 @@
 
 <footer class="pied">
   <p>Julen Somet García · <a href="/">Portfolio</a> · <a href="/#contact">Contact</a></p>
+  <p class="aurebesh" aria-hidden="true">que la force soit avec vous</p>
   <p class="clin-oeil">Un clin d'œil à une saga bien connue, sans lien avec ses créateurs.</p>
 </footer>
 </body>
