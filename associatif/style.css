@@ -189,6 +189,26 @@ h1, h2 { font-family: var(--titre); font-weight: 700; line-height: 1.15; margin:
 .js .couche-galaxie .sous-titre { font-size: 0.95rem; }
 .js .couche-galaxie .systeme-solaire { width: min(96vw, calc(100vh - 210px)); margin-top: 0; }
 
+/* écran large : le titre flotte dans la marge à gauche, et le système solaire prend
+   toute la hauteur de l'écran ; le titre laisse passer les clics vers les astres */
+@media (min-aspect-ratio: 8/5) {
+  .js .couche-galaxie .systeme-solaire { width: min(96vw, calc(100vh - 70px)); }
+  .js .couche-galaxie .entete {
+    position: absolute;
+    top: 72px;
+    left: 28px;
+    z-index: 5;
+    width: calc((100vw - min(96vw, 100vh - 70px)) / 2 - 20px);
+    padding: 0;
+    text-align: left;
+    pointer-events: none;
+  }
+  .js .couche-galaxie .entete h1 { font-size: clamp(1.6rem, 2.6vw, 2.8rem); line-height: 1.05; }
+  .js .couche-galaxie .sabre { justify-content: flex-start; margin: 8px 0 12px; }
+  .js .couche-galaxie .sabre-lame { width: 70%; }
+  .js .couche-galaxie .sous-titre { margin: 0; max-width: none; }
+}
+
 /* ===== Barre de navigation (comme dans l'ébauche : noire, bordée de jaune) ===== */
 .barre {
   position: sticky;
@@ -486,7 +506,26 @@ h1, h2 { font-family: var(--titre); font-weight: 700; line-height: 1.15; margin:
 }
 .role { font-family: var(--titre); color: var(--cyan); margin-top: -0.3rem; }
 .chiffre strong { font-family: var(--titre); font-size: 2.4rem; color: var(--jaune); margin-right: 0.3rem; }
-.chiffre { color: var(--texte-doux); }
+.chiffre { color: var(--texte-doux); margin: 0; }
+.chiffres { display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem; margin: 0.6rem 0 1rem; }
+.chiffres .chiffre strong { font-size: 2rem; }
+.retiens {
+  margin: 1.2rem 0 0;
+  padding: 12px 16px;
+  border-left: 3px solid var(--sabre-bleu);
+  background: rgba(79, 195, 255, 0.07);
+  box-shadow: inset 4px 0 12px -6px var(--sabre-bleu);
+}
+.retiens h3 {
+  margin: 0 0 0.3rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--holo);
+}
+.retiens p { margin: 0; }
 .fiche ul { padding-left: 1.2rem; }
 .fiche li { margin: 0.25rem 0; }
 .fiche li::marker { color: var(--jaune); }
@@ -520,6 +559,29 @@ h1, h2 { font-family: var(--titre); font-weight: 700; line-height: 1.15; margin:
   color: var(--texte-doux);
   font-size: 0.9rem;
 }
+.pied-titre {
+  margin: 0 0 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--jaune);
+}
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem 1.4rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+.contacts a {
+  font-family: var(--titre);
+  text-decoration: none;
+  border-bottom: 2px solid rgba(79, 195, 255, 0.5);
+}
+.contacts a:hover { color: #fff; border-bottom-color: var(--sabre-bleu); box-shadow: 0 6px 10px -6px var(--sabre-bleu); }
 .pied .aurebesh { margin: 0.4rem 0; font-size: clamp(0.7rem, 2.8vw, 0.95rem); }
 .clin-oeil { font-size: 0.8rem; opacity: 0.7; }
 
