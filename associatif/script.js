@@ -23,9 +23,10 @@
   };
   requestAnimationFrame(tourner);
 
-  // ---------- Introduction pilotée par le défilement ----------
+  // ---------- Voyage piloté par le défilement ----------
   // p va de 0 (haut de l'intro) à 1 (fin de l'intro) ; chaque élément évolue sur sa
-  // propre tranche de p, comme une suite d'images qu'on fait défiler.
+  // propre tranche de p, comme une suite d'images qu'on fait défiler. La galaxie est la
+  // dernière couche de la même scène : elle arrive par transparence, la page ne descend pas.
   const intro = document.querySelector(".intro");
   const etape = (p, debut, fin) => Math.min(1, Math.max(0, (p - debut) / (fin - debut)));
 
@@ -42,13 +43,26 @@
       "--logo-s": 2.6 - 2.55 * logo,
       "--texte-o": etape(p, 0.26, 0.28) * (1 - etape(p, 0.78, 0.82)),
       "--texte-y": texte,
-      // hyperespace : les traits s'intensifient, l'éclair éclate, puis tout s'efface
-      "--hyper": etape(p, 0.8, 0.94),
-      "--hyper-o": etape(p, 0.8, 0.84) * (1 - etape(p, 0.95, 1)),
-      "--eclair": etape(p, 0.91, 0.95) * (1 - etape(p, 0.95, 1)),
+      // hyperespace : les traits s'allongent puis s'effacent pendant que la galaxie apparaît
+      "--hyper": etape(p, 0.78, 0.9),
+      "--hyper-o": etape(p, 0.78, 0.82) * (1 - etape(p, 0.88, 0.95)),
+      "--galaxie-o": etape(p, 0.86, 0.94),
+      "--galaxie-s": 1.35 - 0.35 * etape(p, 0.86, 0.95),
     };
     for (const [nom, valeur] of Object.entries(valeurs)) intro.style.setProperty(nom, valeur.toFixed(4));
+    // les planètes et les lunes ne deviennent cliquables qu'une fois la galaxie arrivée
+    intro.classList.toggle("arrivee", p >= 0.9);
   };
+
+  // Les liens « Carte » (#galaxie) mènent au moment où la galaxie est entièrement arrivée
+  const allerALaGalaxie = () => {
+    const course = intro.offsetHeight - window.innerHeight;
+    window.scrollTo(0, intro.offsetTop + 0.96 * course);
+  };
+  window.addEventListener("hashchange", () => { if (location.hash === "#galaxie") allerALaGalaxie(); });
+  document.querySelectorAll('a[href="#galaxie"]').forEach((a) =>
+    a.addEventListener("click", () => setTimeout(allerALaGalaxie, 0)));
+  if (location.hash === "#galaxie") window.addEventListener("load", allerALaGalaxie);
 
   let enAttente = false;
   const demander = () => {

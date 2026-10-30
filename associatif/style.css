@@ -70,7 +70,7 @@ h1, h2 { font-family: var(--titre); font-weight: 700; line-height: 1.15; margin:
    progression et donne les valeurs --debut-o, --logo-s, --texte-y, --hyper… */
 .intro { position: relative; }
 .intro-scene { position: relative; padding: 40px 16px; text-align: center; }
-.hyperespace, .eclair, .indice { display: none; }
+.hyperespace, .indice { display: none; }
 .intro-debut { margin: 0 auto 1rem; max-width: 26em; font-size: clamp(1.1rem, 2.6vw, 1.6rem); color: #4bd5ee; }
 .intro-logo {
   margin: 0 0 1rem;
@@ -87,7 +87,7 @@ h1, h2 { font-family: var(--titre); font-weight: 700; line-height: 1.15; margin:
 .episode, .episode-titre { text-align: center; }
 .episode-titre { font-size: 1.4em; font-weight: 700; }
 
-.js .intro { height: 800vh; }  /* plus de texte : plus de défilement */
+.js .intro { height: 900vh; }  /* texte, hyperespace puis arrivée dans la galaxie */
 .js .intro-scene {
   position: sticky;
   top: 0;
@@ -132,8 +132,7 @@ h1, h2 { font-family: var(--titre); font-weight: 700; line-height: 1.15; margin:
   transform: translateX(-50%) rotateX(24deg) translateY(calc(var(--texte-y, 0) * -125%));
 }
 /* saut en hyperespace : des traits de lumière partent du centre, s'allongent et
-   s'intensifient (--hyper), un éclair blanc éclate (--eclair), puis tout s'efface
-   pour révéler la galaxie (--hyper-o redescend à 0) */
+   s'intensifient (--hyper), puis s'effacent (--hyper-o) pendant que la galaxie apparaît */
 .js .hyperespace, .js .hyperespace::after {
   position: absolute;
   inset: -60%;
@@ -153,15 +152,6 @@ h1, h2 { font-family: var(--titre); font-weight: 700; line-height: 1.15; margin:
   background: repeating-conic-gradient(from 1.3deg, transparent 0deg 3.4deg, rgba(120, 190, 255, 0.6) 3.4deg 3.6deg);
   transform: scale(calc(1 + var(--hyper, 0) * 0.8));
 }
-.js .eclair {
-  display: block;
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  background: radial-gradient(circle, #fff 0 30%, rgba(232, 245, 255, 0.97) 50%, rgba(170, 215, 255, 0.75) 72%, rgba(120, 180, 255, 0.35) 100%);
-  opacity: var(--eclair, 0);
-}
 .js .indice {
   display: block;
   position: absolute;
@@ -178,6 +168,26 @@ h1, h2 { font-family: var(--titre); font-weight: 700; line-height: 1.15; margin:
   animation: rebond 1.6s ease-in-out infinite;
 }
 @keyframes rebond { 50% { transform: translate(-50%, 6px); } }
+
+/* la galaxie, dernière couche de la scène : elle apparaît par transparence (--galaxie-o)
+   avec un léger zoom arrière (--galaxie-s), comme une arrivée au sortir de l'hyperespace.
+   Elle ne reçoit les clics qu'une fois arrivée (classe .arrivee posée par script.js). */
+.js .couche-galaxie {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  padding-top: 56px;  /* sous la barre de navigation */
+  opacity: var(--galaxie-o, 0);
+  transform: scale(var(--galaxie-s, 1.35));
+  pointer-events: none;
+}
+.js .intro.arrivee .couche-galaxie { pointer-events: auto; }
+.js .couche-galaxie .entete { padding: 8px 16px 0; }
+.js .couche-galaxie .entete .aurebesh { margin-bottom: 0.2rem; font-size: clamp(0.75rem, 1.6vw, 1rem); }
+.js .couche-galaxie .entete h1 { font-size: clamp(1.6rem, 3.8vw, 2.6rem); margin-bottom: 0.2rem; }
+.js .couche-galaxie .sabre { margin: 2px auto 8px; }
+.js .couche-galaxie .sous-titre { font-size: 0.95rem; }
+.js .couche-galaxie .systeme-solaire { width: min(96vw, calc(100vh - 210px)); margin-top: 0; }
 
 /* ===== Barre de navigation (comme dans l'ébauche : noire, bordée de jaune) ===== */
 .barre {

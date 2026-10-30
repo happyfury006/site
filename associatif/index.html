@@ -24,14 +24,13 @@
   </div>
 </nav>
 
-<!-- Introduction pilotée par le défilement, comme les pages produit d'Apple : en faisant
-     défiler, la phrase d'ouverture s'efface, le logo rétrécit, le texte s'éloigne en
-     perspective, puis un saut en hyperespace mène à la carte. Sans JavaScript, ou avec le
+<!-- Voyage piloté par le défilement, comme les pages produit d'Apple : en faisant défiler,
+     la phrase d'ouverture s'efface, le logo rétrécit, le texte s'éloigne en perspective,
+     l'hyperespace s'allume, puis la galaxie apparaît par transparence dans la même scène. Sans JavaScript, ou avec le
      réglage « réduire les animations », elle s'affiche simplement comme du texte. -->
 <section class="intro" aria-label="Introduction">
   <div class="intro-scene">
     <div class="hyperespace" aria-hidden="true"></div>
-    <div class="eclair" aria-hidden="true"></div>
     <p class="intro-debut">Il y a peu de temps, dans une école d'ingénieurs pas si lointaine…</p>
     <p class="intro-logo" aria-hidden="true">ZZ<br>WARS</p>
     <div class="defilement">
@@ -48,41 +47,43 @@
       </div>
     </div>
     <p class="indice" aria-hidden="true">Faites défiler ↓</p>
+    <!-- Dernière couche de la scène : la galaxie apparaît en fondu derrière l'hyperespace,
+         sans que la page « descende ». Sans JavaScript, elle suit simplement l'introduction. -->
+    <div class="couche-galaxie" id="galaxie">
+      <header class="entete">
+        <p class="aurebesh" aria-hidden="true">galaxie associative</p>
+        <h1>La galaxie associative</h1>
+        <div class="sabre" aria-hidden="true"><span class="sabre-poignee"></span><span class="sabre-lame"></span></div>
+        <p class="sous-titre">Mon engagement à l'ISIMA, planète par planète. Cliquez sur une planète ou une lune pour ouvrir sa fiche.</p>
+      </header>
+      <!-- Carte : le soleil ISIMA au centre, les planètes BDE et Drezzing en orbite, chacune avec
+           ses lunes. Chaque astre est un lien vers sa fiche (#fiche-…), ouverte en CSS avec :target -->
+      <div class="systeme-solaire">
+        <div class="soleil" aria-hidden="true"><span>ISIMA</span><small>45.76° N · 3.11° E</small></div>
+        <div class="orbite-planete orbite-bde">
+          <div class="porteur" data-periode="140" data-depart="-150">
+            <div class="sous-systeme sous-bde">
+              <a class="planete planete-bde" href="#fiche-bde"><span>BDE</span></a>
+              <div class="orbite orbite-1"><a class="lune lune-ca" data-periode="34" data-depart="-140" href="#fiche-ca" aria-label="Conseil d'administration"><span>Conseil d'admin.</span></a></div>
+              <div class="orbite orbite-2"><a class="lune lune-wea" data-periode="48" data-depart="-20" href="#fiche-weekend"><span>Week-end d'accueil</span></a></div>
+              <div class="orbite orbite-3"><a class="lune lune-site" data-periode="64" data-depart="110" href="#fiche-site"><span>Site du BDE</span></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="orbite-planete orbite-drezzing">
+          <div class="porteur" data-periode="220" data-depart="30">
+            <div class="sous-systeme sous-drezzing">
+              <a class="planete planete-drezzing" href="#fiche-drezzing"><span>Drezzing</span></a>
+              <div class="orbite orbite-1"><a class="lune lune-boutique" data-periode="40" data-depart="-50" href="#fiche-boutique"><span>Boutique en ligne</span></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<header class="entete" id="galaxie">
-  <p class="aurebesh" aria-hidden="true">galaxie associative</p>
-  <h1>La galaxie associative</h1>
-  <div class="sabre" aria-hidden="true"><span class="sabre-poignee"></span><span class="sabre-lame"></span></div>
-  <p class="sous-titre">Mon engagement à l'ISIMA, planète par planète. Cliquez sur une planète ou une lune pour ouvrir sa fiche.</p>
-</header>
-
 <main>
-  <!-- Carte : le soleil ISIMA au centre, les planètes BDE et Drezzing en orbite, chacune avec
-       ses lunes. Chaque astre est un lien vers sa fiche (#fiche-…), ouverte en CSS avec :target -->
-  <div class="systeme-solaire">
-    <div class="soleil" aria-hidden="true"><span>ISIMA</span><small>45.76° N · 3.11° E</small></div>
-    <div class="orbite-planete orbite-bde">
-      <div class="porteur" data-periode="140" data-depart="-150">
-        <div class="sous-systeme sous-bde">
-          <a class="planete planete-bde" href="#fiche-bde"><span>BDE</span></a>
-          <div class="orbite orbite-1"><a class="lune lune-ca" data-periode="34" data-depart="-140" href="#fiche-ca" aria-label="Conseil d'administration"><span>Conseil d'admin.</span></a></div>
-          <div class="orbite orbite-2"><a class="lune lune-wea" data-periode="48" data-depart="-20" href="#fiche-weekend"><span>Week-end d'accueil</span></a></div>
-          <div class="orbite orbite-3"><a class="lune lune-site" data-periode="64" data-depart="110" href="#fiche-site"><span>Site du BDE</span></a></div>
-        </div>
-      </div>
-    </div>
-    <div class="orbite-planete orbite-drezzing">
-      <div class="porteur" data-periode="220" data-depart="30">
-        <div class="sous-systeme sous-drezzing">
-          <a class="planete planete-drezzing" href="#fiche-drezzing"><span>Drezzing</span></a>
-          <div class="orbite orbite-1"><a class="lune lune-boutique" data-periode="40" data-depart="-50" href="#fiche-boutique"><span>Boutique en ligne</span></a></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- La même navigation sous forme de liste : lecteurs d'écran, clavier, petits écrans -->
   <nav class="liste" aria-label="Toutes les fiches">
     <h2>Toutes les missions</h2>
