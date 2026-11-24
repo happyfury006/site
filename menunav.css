@@ -1,0 +1,61 @@
+.boxplanets{
+    position: absolute;
+    top: 50px;
+    left: 0;
+    height: 25%;
+    width: 10%;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    pad: ;
+    background-color: black;
+    /* backdrop-filter: blur(5px); */
+    box-shadow: 0 0 30px black;
+    border-color: yellow;
+    border-bottom-right-radius:20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction:column ;
+    
+}
+/* .Corrusant{
+    position: relative;
+}
+.Naboo{
+    position: relative;
+}
+.Scariff{
+    position: relative;
+}
+.Dathomir{
+    position: relative;
+} */
+
+.boxplanets.active{
+    transition: transform 0.5s ease;
+    transform: translateY(400px);
+}
+.Corrusant.active{
+    transition: transform 0.5s ease;
+    transform: translateY(400px);
+    overflow: hidden;
+
+}
+.Naboo.active{
+    transition: transform 0.5s ease;
+    transform: translateY(400px);
+    overflow: hidden;
+
+}
+.Scariff.active{
+    transition: transform 0.5s ease;
+    transform: translateY(400px);
+    overflow: hidden;
+
+}
+.Dathomir.active{
+    transition: transform 0.5s ease;
+    transform: translateY(400px);
+    overflow: hidden;
+
+}
